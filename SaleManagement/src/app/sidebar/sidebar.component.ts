@@ -16,11 +16,11 @@ export class SidebarComponent implements OnInit {
         label: 'Quản lý',
         icon: 'pi pi-pw pi-folder',
         items: [
-        { label: 'Nhập hàng', icon: 'pi pi-fw pi-external-link', routerLink:'management/import'},
+        { label: 'Nhập hàng', icon: 'pi pi-fw pi-window-minimize', routerLink:'/management/import'},
         { separator: true },
-        { label: 'Bán hàng', icon: 'pi pi-fw pi-times', routerLink:'management/export'},
+        { label: 'Bán hàng', icon: 'pi pi-fw pi-shopping-cart', routerLink:'/management/export'},
         { separator: true },
-        { label: 'Kho hàng', icon: 'pi pi-fw pi-times', routerLink:'management/warehouse' }
+        { label: 'Kho hàng', icon: 'pi pi-fw pi-home', routerLink:'/management/warehouse' }
         ]
       }
     ];

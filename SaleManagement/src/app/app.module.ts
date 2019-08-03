@@ -26,6 +26,8 @@ import { RouterModule } from '@angular/router';
 import { ImportComponent } from './management/import/import.component';
 import { ExportComponent } from './management/export/export.component';
 import { WarehouseComponent } from './management/warehouse/warehouse.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { WarehouseComponent } from './management/warehouse/warehouse.component';
     AppRoutingModule,
     AccordionModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
     InputTextModule,
     DialogModule,
     ButtonModule, 
@@ -56,7 +60,6 @@ import { WarehouseComponent } from './management/warehouse/warehouse.component';
     NgbPaginationModule,
     NgbAlertModule,
     RouterModule.forRoot([
-      { path: '', component: DashboardComponent},
       { path: 'management/import', component: ImportComponent},
       { path: 'management/export', component: ExportComponent},
       { path: 'management/warehouse', component: WarehouseComponent}

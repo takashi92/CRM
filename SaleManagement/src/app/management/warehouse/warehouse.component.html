@@ -1,1 +1,50 @@
-<p>warehouse works!</p>
+<p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align:left">
+            <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [width]="300">
+    <div class="ui-g ui-fluid" *ngIf="product">
+        <div class="ui-g-4"><label for="brand">Nhãn hàng</label></div>
+        <div class="ui-g-8"><input pInputText id="brand" [(ngModel)]="product.brand" /></div>
+        
+        <div class="ui-g-4"><label for="name">Tên sản phẩm</label></div>
+        <div class="ui-g-8"><input pInputText id="name" [(ngModel)]="product.name" /></div>
+        
+        <div class="ui-g-4"><label for="code">Mã sản phẩm</label></div>
+        <div class="ui-g-8"><input pInputText id="code" [(ngModel)]="product.code" /></div>
+        
+        <div class="ui-g-4"><label for="color">Màu</label></div>
+        <div class="ui-g-8"><input pInputText id="color" [(ngModel)]="product.color" /></div>
+
+        <div class="ui-g-4"><label for="size">Kích cỡ</label></div>
+        <div class="ui-g-8"><input pInputText id="size" [(ngModel)]="product.size" /></div>
+
+        <div class="ui-g-4"><label for="note">Ghi chú</label></div>
+        <div class="ui-g-8"><input pInputText id="note" [(ngModel)]="product.note" /></div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="pi pi-times" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+</p-dialog>
