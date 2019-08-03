@@ -13,28 +13,33 @@ import { DialogModule } from 'primeng/dialog';
 
 import { MenubarModule } from 'primeng/menubar';
 import {PanelMenuModule} from 'primeng/panelmenu';
-import { NavbarSearchComponentComponent } from './top-bar/navbar-search-component/navbar-search-component.component';
-import { NavbarComponentComponent } from './top-bar/navbar-component/navbar-component.component';
+import { NavbarSearchComponent } from './top-bar/navbar-search/navbar-search.component';
+import { NavbarComponent } from './top-bar/navbar/navbar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-import { SidebarComponentComponent } from './sidebar-component/sidebar-component.component';
-import { DashboardComponentComponent } from './dashboard/dashboard-component/dashboard-component.component';
-import { OverviewComponentComponent } from './dashboard/overview-component/overview-component.component';
-import { AreaChartComponentComponent } from './dashboard/area-chart-component/area-chart-component.component';
-import { DataTableComponentComponent } from './dashboard/data-table-component/data-table-component.component';
-import { FooterComponentComponent } from './footer-component/footer-component.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { OverviewComponent } from './dashboard/overview/overview.component';
+import { AreaChartComponent } from './dashboard/area-chart/area-chart.component';
+import { FooterComponent } from './footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { ImportComponent } from './management/import/import.component';
+import { ExportComponent } from './management/export/export.component';
+import { WarehouseComponent } from './management/warehouse/warehouse.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarSearchComponentComponent,
-    NavbarComponentComponent,
-    SidebarComponentComponent,
-    DashboardComponentComponent,
-    OverviewComponentComponent,
-    AreaChartComponentComponent,
-    DataTableComponentComponent,
-    FooterComponentComponent
+    NavbarSearchComponent,
+    NavbarComponent,
+    SidebarComponent,
+    DashboardComponent,
+    OverviewComponent,
+    AreaChartComponent,
+    FooterComponent,
+    ImportComponent,
+    ExportComponent,
+    WarehouseComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,9 +51,16 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
     ButtonModule, 
     MenubarModule,
     PanelMenuModule,
+    TableModule,
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    RouterModule.forRoot([
+      { path: '', component: DashboardComponent},
+      { path: 'management/import', component: ImportComponent},
+      { path: 'management/export', component: ExportComponent},
+      { path: 'management/warehouse', component: WarehouseComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
