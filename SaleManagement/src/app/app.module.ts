@@ -10,9 +10,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
-
+import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
-import {PanelMenuModule} from 'primeng/panelmenu';
+import { PanelMenuModule } from 'primeng/panelmenu';
 import { NavbarSearchComponent } from './top-bar/navbar-search/navbar-search.component';
 import { NavbarComponent } from './top-bar/navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -26,6 +26,7 @@ import { ExportComponent } from './management/export/export.component';
 import { WarehouseComponent } from './management/warehouse/warehouse.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -50,14 +51,16 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     InputTextModule,
     DialogModule,
-    ButtonModule, 
+    ButtonModule,
     MenubarModule,
     PanelMenuModule,
     TableModule,
+    DropdownModule,
+    CalendarModule,
     RouterModule.forRoot([
-      { path: 'management/import', component: ImportComponent},
-      { path: 'management/export', component: ExportComponent},
-      { path: 'management/warehouse', component: WarehouseComponent}
+      { path: 'management/import', component: ImportComponent },
+      { path: 'management/export', component: ExportComponent },
+      { path: 'management/warehouse', component: WarehouseComponent }
     ])
   ],
   providers: [],
