@@ -14,11 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Proxy;
-
 @Entity
 @Table(name = "customers", catalog = "sales_management")
-@Proxy(lazy = false)
 public class Customers implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,9 +30,8 @@ public class Customers implements java.io.Serializable {
 	public Customers() {
 	}
 
-	public Customers(Date created, Date updated) {
+	public Customers(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
 	public Customers(String name, String address, String note, Date created, Date updated, Set<Bills> billses) {
@@ -97,7 +93,7 @@ public class Customers implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}

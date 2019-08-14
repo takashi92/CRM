@@ -10,11 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Proxy;
-
 @Entity
 @Table(name = "supply", catalog = "sales_management")
-@Proxy(lazy = false)
 public class Supply implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +40,7 @@ public class Supply implements java.io.Serializable {
 			@AttributeOverride(name = "quantity", column = @Column(name = "quantity")),
 			@AttributeOverride(name = "note", column = @Column(name = "note")),
 			@AttributeOverride(name = "created", column = @Column(name = "created", nullable = false, length = 19)),
-			@AttributeOverride(name = "updated", column = @Column(name = "updated", nullable = false, length = 19)) })
+			@AttributeOverride(name = "updated", column = @Column(name = "updated", length = 19)) })
 	public SupplyId getId() {
 		return this.id;
 	}

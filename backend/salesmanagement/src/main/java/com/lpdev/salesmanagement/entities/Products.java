@@ -1,16 +1,13 @@
 package com.lpdev.salesmanagement.entities;
-// Generated Aug 7, 2019 9:03:04 PM by Hibernate Tools 4.3.5.Final
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,15 +16,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "products", catalog = "sales_management")
 public class Products implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private Brand brand;
 	private Categories categories;
+	private String images;
 	private String name;
 	private String code;
 	private String barCode;
@@ -42,14 +39,16 @@ public class Products implements java.io.Serializable {
 	public Products() {
 	}
 
-	public Products(Date created, Date updated) {
+	public Products(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
-	public Products(Categories categories, String name, String code, String barCode, String properties, String note,
-			Date created, Date updated, Set<BillDetails> billDetailses, Set<Storage> storages, Set<Supply> supplies) {
+	public Products(Brand brand, Categories categories, String images, String name, String code, String barCode,
+			String properties, String note, Date created, Date updated, Set<BillDetails> billDetailses,
+			Set<Storage> storages, Set<Supply> supplies) {
+		this.brand = brand;
 		this.categories = categories;
+		this.images = images;
 		this.name = name;
 		this.code = code;
 		this.barCode = barCode;
@@ -75,6 +74,16 @@ public class Products implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "brand_id")
+	public Brand getBrand() {
+		return this.brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	public Categories getCategories() {
 		return this.categories;
@@ -82,6 +91,15 @@ public class Products implements java.io.Serializable {
 
 	public void setCategories(Categories categories) {
 		this.categories = categories;
+	}
+
+	@Column(name = "images")
+	public String getImages() {
+		return this.images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
 	}
 
 	@Column(name = "name")
@@ -140,7 +158,7 @@ public class Products implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}
@@ -150,7 +168,6 @@ public class Products implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	@JsonIgnore
 	public Set<BillDetails> getBillDetailses() {
 		return this.billDetailses;
 	}
@@ -160,7 +177,6 @@ public class Products implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	@JsonIgnore
 	public Set<Storage> getStorages() {
 		return this.storages;
 	}
@@ -170,7 +186,6 @@ public class Products implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	@JsonIgnore
 	public Set<Supply> getSupplies() {
 		return this.supplies;
 	}

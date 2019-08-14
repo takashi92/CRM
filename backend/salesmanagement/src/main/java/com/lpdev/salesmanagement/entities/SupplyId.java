@@ -19,9 +19,8 @@ public class SupplyId implements java.io.Serializable {
 	public SupplyId() {
 	}
 
-	public SupplyId(Date created, Date updated) {
+	public SupplyId(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
 	public SupplyId(Integer productId, Integer supplierId, Double price, Integer quantity, String note, Date created,
@@ -89,7 +88,7 @@ public class SupplyId implements java.io.Serializable {
 		this.created = created;
 	}
 
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}

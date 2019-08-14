@@ -18,9 +18,8 @@ public class StorageId implements java.io.Serializable {
 	public StorageId() {
 	}
 
-	public StorageId(Date created, Date updated) {
+	public StorageId(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
 	public StorageId(Integer productId, Integer quantity, Double price, String note, Date created, Date updated) {
@@ -77,7 +76,7 @@ public class StorageId implements java.io.Serializable {
 		this.created = created;
 	}
 
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}

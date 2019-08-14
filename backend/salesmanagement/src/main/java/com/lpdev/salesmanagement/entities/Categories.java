@@ -16,13 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Proxy;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "categories", catalog = "sales_management")
-@Proxy(lazy = false)
 public class Categories implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -39,9 +34,8 @@ public class Categories implements java.io.Serializable {
 	public Categories() {
 	}
 
-	public Categories(Date created, Date updated) {
+	public Categories(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
 	public Categories(Categories categories, String name, String note, Date created, Date updated,
@@ -69,7 +63,7 @@ public class Categories implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "parent_id")
 	public Categories getCategories() {
 		return this.categories;
 	}
@@ -107,7 +101,7 @@ public class Categories implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}
@@ -117,7 +111,6 @@ public class Categories implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	@JsonIgnore
 	public Set<Categories> getCategorieses() {
 		return this.categorieses;
 	}
@@ -127,7 +120,6 @@ public class Categories implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	@JsonIgnore
 	public Set<Products> getProductses() {
 		return this.productses;
 	}
@@ -137,7 +129,6 @@ public class Categories implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	@JsonIgnore
 	public Set<Properties> getPropertieses() {
 		return this.propertieses;
 	}

@@ -1,7 +1,6 @@
 package com.lpdev.salesmanagement.entities;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -21,9 +20,8 @@ public class BillDetailsId implements java.io.Serializable {
 	public BillDetailsId() {
 	}
 
-	public BillDetailsId(Date created, Date updated) {
+	public BillDetailsId(Date created) {
 		this.created = created;
-		this.updated = updated;
 	}
 
 	public BillDetailsId(Integer billId, Integer productId, Integer quantity, Integer sale, Double price, String note,
@@ -101,7 +99,7 @@ public class BillDetailsId implements java.io.Serializable {
 		this.created = created;
 	}
 
-	@Column(name = "updated", nullable = false, length = 19)
+	@Column(name = "updated", length = 19)
 	public Date getUpdated() {
 		return this.updated;
 	}
