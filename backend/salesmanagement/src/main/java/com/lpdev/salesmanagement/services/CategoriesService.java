@@ -1,5 +1,7 @@
 package com.lpdev.salesmanagement.services;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class CategoriesService {
 	public void persist(Categories transientInstance) {
 		log.debug("persisting Categories instance");
 		try {
+			transientInstance.setCreated(new Date().getTime());
 			categoriesRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
