@@ -1,6 +1,5 @@
 package com.lpdev.salesmanagement.entities;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -13,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "categories", catalog = "sales_management")
@@ -25,8 +22,8 @@ public class Categories implements java.io.Serializable {
 	private Categories categories;
 	private String name;
 	private String note;
-	private Date created;
-	private Date updated;
+	private Long created;
+	private Long updated;
 	private Set<Categories> categorieses = new HashSet<Categories>(0);
 	private Set<Products> productses = new HashSet<Products>(0);
 	private Set<Properties> propertieses = new HashSet<Properties>(0);
@@ -34,11 +31,7 @@ public class Categories implements java.io.Serializable {
 	public Categories() {
 	}
 
-	public Categories(Date created) {
-		this.created = created;
-	}
-
-	public Categories(Categories categories, String name, String note, Date created, Date updated,
+	public Categories(Categories categories, String name, String note, Long created, Long updated,
 			Set<Categories> categorieses, Set<Products> productses, Set<Properties> propertieses) {
 		this.categories = categories;
 		this.name = name;
@@ -90,23 +83,21 @@ public class Categories implements java.io.Serializable {
 		this.note = note;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = false, length = 19)
-	public Date getCreated() {
+	@Column(name = "created")
+	public Long getCreated() {
 		return this.created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(Long created) {
 		this.created = created;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", length = 19)
-	public Date getUpdated() {
+	@Column(name = "updated")
+	public Long getUpdated() {
 		return this.updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(Long updated) {
 		this.updated = updated;
 	}
 

@@ -40,8 +40,8 @@ public class BillDetails implements java.io.Serializable {
 			@AttributeOverride(name = "sale", column = @Column(name = "sale")),
 			@AttributeOverride(name = "price", column = @Column(name = "price", precision = 22, scale = 0)),
 			@AttributeOverride(name = "note", column = @Column(name = "note")),
-			@AttributeOverride(name = "created", column = @Column(name = "created", nullable = false, length = 19)),
-			@AttributeOverride(name = "updated", column = @Column(name = "updated", length = 19)) })
+			@AttributeOverride(name = "created", column = @Column(name = "created")),
+			@AttributeOverride(name = "updated", column = @Column(name = "updated")) })
 	public BillDetailsId getId() {
 		return this.id;
 	}

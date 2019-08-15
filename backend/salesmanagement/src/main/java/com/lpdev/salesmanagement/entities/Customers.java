@@ -1,6 +1,5 @@
 package com.lpdev.salesmanagement.entities;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "customers", catalog = "sales_management")
@@ -23,18 +20,14 @@ public class Customers implements java.io.Serializable {
 	private String name;
 	private String address;
 	private String note;
-	private Date created;
-	private Date updated;
+	private Long created;
+	private Long updated;
 	private Set<Bills> billses = new HashSet<Bills>(0);
 
 	public Customers() {
 	}
 
-	public Customers(Date created) {
-		this.created = created;
-	}
-
-	public Customers(String name, String address, String note, Date created, Date updated, Set<Bills> billses) {
+	public Customers(String name, String address, String note, Long created, Long updated, Set<Bills> billses) {
 		this.name = name;
 		this.address = address;
 		this.note = note;
@@ -82,23 +75,21 @@ public class Customers implements java.io.Serializable {
 		this.note = note;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = false, length = 19)
-	public Date getCreated() {
+	@Column(name = "created")
+	public Long getCreated() {
 		return this.created;
 	}
 
-	public void setCreated(Date created) {
+	public void setCreated(Long created) {
 		this.created = created;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", length = 19)
-	public Date getUpdated() {
+	@Column(name = "updated")
+	public Long getUpdated() {
 		return this.updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(Long updated) {
 		this.updated = updated;
 	}
 

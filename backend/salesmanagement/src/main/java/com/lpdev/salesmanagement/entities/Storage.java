@@ -36,8 +36,8 @@ public class Storage implements java.io.Serializable {
 			@AttributeOverride(name = "quantity", column = @Column(name = "quantity")),
 			@AttributeOverride(name = "price", column = @Column(name = "price", precision = 22, scale = 0)),
 			@AttributeOverride(name = "note", column = @Column(name = "note")),
-			@AttributeOverride(name = "created", column = @Column(name = "created", nullable = false, length = 19)),
-			@AttributeOverride(name = "updated", column = @Column(name = "updated", length = 19)) })
+			@AttributeOverride(name = "created", column = @Column(name = "created")),
+			@AttributeOverride(name = "updated", column = @Column(name = "updated")) })
 	public StorageId getId() {
 		return this.id;
 	}
