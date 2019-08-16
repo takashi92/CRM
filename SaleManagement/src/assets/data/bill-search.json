@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "billId": 1,
+            "brand": "CHAANG1",
+            "amount": "",
+            "createDate":""
+        },
+        {
+            "billId": 2,
+            "brand": "CHAANG2",
+            "amount": "",
+            "createDate":""
+        }
+    ]
+}

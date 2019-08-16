@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "brandName": "",
+            "data": [
+                {
+                    "productName": "",
+                    "data":[
+                        {
+                            "price": "",
+                            "number": "",
+                            "sale": [],
+                            "color": [],
+                            "size": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
