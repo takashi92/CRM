@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BillSearchService } from 'src/app/services/bill-search.service';
 import { SelectItem } from 'primeng/api';
 import { BillSearch } from 'src/app/domain/billsearch';
+import { BillDetail } from 'src/app/domain/billdetail';
 
 @Component({
   selector: 'app-bill-search',
@@ -12,7 +13,7 @@ export class BillSearchComponent implements OnInit {
 
   billSearchs: BillSearch[];
 
-  selectedBill:BillSearch;
+  selectedBills: BillDetail[];
 
   displayDialog: boolean;
 
@@ -23,6 +24,7 @@ export class BillSearchComponent implements OnInit {
   sortField: string;
 
   sortOrder: number;
+  cols: any[];
   constructor(private billSearchService: BillSearchService) { }
 
   ngOnInit() {
@@ -33,10 +35,22 @@ export class BillSearchComponent implements OnInit {
       { label: 'Oldest First', value: 'year' },
       { label: 'Brand', value: 'brand' }
     ];
+
+    this.cols = [
+      { field: 'brand', header: 'Nhãn hàng' },
+      { field: 'name', header: 'Tên sản phẩm' },
+      { field: 'color', header: 'Màu sắc' },
+      { field: 'size', header: 'Size' },
+      { field: 'price', header: 'Đơn giá' },
+      { field: 'number', header: 'Số lượng' },
+      { field: 'discount', header: 'Giảm giá' },
+      { field: 'created', header: 'Ngày bán' },
+      { field: 'amount', header: 'Thành tiền' }
+    ];
   }
 
-  selectBill(event: Event, bill:BillSearch ) {
-    this.selectedBill = bill;
+  selectBill(event: Event, bill: BillSearch) {
+    this.billSearchService.getBillDetail(bill.billId).then(billdetail => this.selectedBills = billdetail);
     this.displayDialog = true;
     event.preventDefault();
   }
@@ -55,7 +69,7 @@ export class BillSearchComponent implements OnInit {
   }
 
   onDialogHide() {
-    this.selectedBill = null;
+    this.selectedBills = null;
   }
 
 }
