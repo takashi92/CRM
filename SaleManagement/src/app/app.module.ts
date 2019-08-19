@@ -26,8 +26,10 @@ import { ExportComponent } from './management/export/export.component';
 import { WarehouseComponent } from './management/warehouse/warehouse.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {CalendarModule} from 'primeng/calendar';
-
+import { CalendarModule } from 'primeng/calendar';
+import { BillSearchComponent } from './management/bill-search/bill-search.component';
+import { DataViewModule } from 'primeng/dataview';
+import { PanelModule } from 'primeng/panel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import {CalendarModule} from 'primeng/calendar';
     ImportComponent,
     ExportComponent,
     WarehouseComponent,
+    BillSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,10 +60,13 @@ import {CalendarModule} from 'primeng/calendar';
     TableModule,
     DropdownModule,
     CalendarModule,
+    DataViewModule,
+    PanelModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },
-      { path: 'management/warehouse', component: WarehouseComponent }
+      { path: 'management/warehouse', component: WarehouseComponent },
+      { path: 'management/billsearch', component: BillSearchComponent }
     ])
   ],
   providers: [],

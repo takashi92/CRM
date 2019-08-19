@@ -20,8 +20,11 @@ export class SidebarComponent implements OnInit {
         { separator: true },
         { label: 'Bán hàng', icon: 'pi pi-fw pi-shopping-cart', routerLink:'/management/export'},
         { separator: true },
-        { label: 'Kho hàng', icon: 'pi pi-fw pi-home', routerLink:'/management/warehouse' }
-        ]
+        { label: 'Kho hàng', icon: 'pi pi-fw pi-home', routerLink:'/management/warehouse' },
+        { separator: true },
+        { label: 'Tìm kiếm hóa đơn', icon: 'pi pi-fw pi-search', routerLink:'/management/billsearch' }
+          
+      ]
       }
     ];
 

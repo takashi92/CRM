@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "brand": "CHAANG1",
+            "productName": "",
+            "material": "",
+            "color": "",
+            "size": "",
+            "price": "",
+            "number": "",
+            "sale": "",
+            "amount": ""
+        },
+        {
+            "brand": "CHAANG2",
+            "productName": "",
+            "material": "",
+            "color": "",
+            "size": "",
+            "price": "",
+            "number": "",
+            "sale": "",
+            "amount": ""
+        }
+    ]
+}
