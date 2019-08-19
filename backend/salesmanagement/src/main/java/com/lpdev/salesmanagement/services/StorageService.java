@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lpdev.salesmanagement.entities.Storage;
-import com.lpdev.salesmanagement.entities.StorageId;
 import com.lpdev.salesmanagement.repositories.StorageRepository;
 
 @Service
@@ -51,7 +50,7 @@ public class StorageService {
 		}
 	}
 
-	public Storage findById(StorageId id) {
+	public Storage findById(Integer id) {
 		log.debug("getting Storage instance with id: " + id);
 		try {
 			Storage instance = storageRepository.getOne(id);

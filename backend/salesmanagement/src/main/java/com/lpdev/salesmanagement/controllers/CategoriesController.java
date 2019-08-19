@@ -21,7 +21,7 @@ public class CategoriesController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> add(CategoryParam categoryParam) {
 		Categories category = new Categories();
-		category.setName(categoryParam.getName());
+		category.setName("Đồ Áo");
 		categoriesService.persist(category);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}

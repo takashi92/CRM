@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,15 +31,15 @@ public class Products implements java.io.Serializable {
 	private Long created;
 	private Long updated;
 	private Set<BillDetails> billDetailses = new HashSet<BillDetails>(0);
-	private Set<Storage> storages = new HashSet<Storage>(0);
+	private Storage storage;
 	private Set<Supply> supplies = new HashSet<Supply>(0);
 
 	public Products() {
 	}
 
 	public Products(Brand brand, Categories categories, String images, String name, String code, String barCode,
-			String properties, String note, Long created, Long updated, Set<BillDetails> billDetailses,
-			Set<Storage> storages, Set<Supply> supplies) {
+			String properties, String note, Long created, Long updated, Set<BillDetails> billDetailses, Storage storage,
+			Set<Supply> supplies) {
 		this.brand = brand;
 		this.categories = categories;
 		this.images = images;
@@ -50,7 +51,7 @@ public class Products implements java.io.Serializable {
 		this.created = created;
 		this.updated = updated;
 		this.billDetailses = billDetailses;
-		this.storages = storages;
+		this.storage = storage;
 		this.supplies = supplies;
 	}
 
@@ -167,13 +168,13 @@ public class Products implements java.io.Serializable {
 		this.billDetailses = billDetailses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	public Set<Storage> getStorages() {
-		return this.storages;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "products")
+	public Storage getStorage() {
+		return this.storage;
 	}
 
-	public void setStorages(Set<Storage> storages) {
-		this.storages = storages;
+	public void setStorage(Storage storage) {
+		this.storage = storage;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "products")

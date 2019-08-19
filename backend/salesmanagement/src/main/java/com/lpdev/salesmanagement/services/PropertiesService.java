@@ -1,5 +1,7 @@
 package com.lpdev.salesmanagement.services;
 
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class PropertiesService {
 	public void persist(Properties transientInstance) {
 		log.debug("persisting Properties instance");
 		try {
+			transientInstance.setCreated(new Date().getTime());
 			propertiesRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
