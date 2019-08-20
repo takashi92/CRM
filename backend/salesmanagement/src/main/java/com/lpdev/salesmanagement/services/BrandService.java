@@ -1,29 +1,28 @@
 package com.lpdev.salesmanagement.services;
 
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Products;
-import com.lpdev.salesmanagement.repositories.ProductsRepository;
+import com.lpdev.salesmanagement.entities.Brand;
+import com.lpdev.salesmanagement.repositories.BrandRepository;
 
 @Service
-public class ProductsService {
+public class BrandService {
 
-	private static final Log log = LogFactory.getLog(ProductsService.class);
+	private static final Log log = LogFactory.getLog(CategoriesService.class);
 
 	@Autowired
-	private ProductsRepository productsRepository;
+	private BrandRepository brandRepository;
 
-	public void persist(Products transientInstance) {
-		log.debug("persisting Products instance");
+	public void persist(Brand transientInstance) {
+		log.debug("persisting Brand instance");
 		try {
 			transientInstance.setCreated(new Date().getTime());
-			productsRepository.save(transientInstance);
+			brandRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -31,10 +30,10 @@ public class ProductsService {
 		}
 	}
 
-	public void remove(Products persistentInstance) {
-		log.debug("removing Products instance");
+	public void remove(Brand persistentInstance) {
+		log.debug("removing Brand instance");
 		try {
-			productsRepository.delete(persistentInstance);
+			brandRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -42,10 +41,10 @@ public class ProductsService {
 		}
 	}
 
-	public Products merge(Products detachedInstance) {
-		log.debug("merging Products instance");
+	public Brand merge(Brand detachedInstance) {
+		log.debug("merging Brand instance");
 		try {
-			Products result = productsRepository.saveAndFlush(detachedInstance);
+			Brand result = brandRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -54,10 +53,10 @@ public class ProductsService {
 		}
 	}
 
-	public Products findById(Integer id) {
-		log.debug("getting Products instance with id: " + id);
+	public Brand findById(Integer id) {
+		log.debug("getting Brand instance with id: " + id);
 		try {
-			Products instance = productsRepository.getOne(id);
+			Brand instance = brandRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
@@ -66,11 +65,12 @@ public class ProductsService {
 		}
 	}
 
-	public List<Products> findAll() {
+	public Brand findByName(String name) {
+		log.debug("getting Brand instance with name: " + name);
 		try {
-			List<Products> products = productsRepository.findAll();
+			Brand instance = brandRepository.findByName(name);
 			log.debug("get successful");
-			return products;
+			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
