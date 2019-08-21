@@ -3,19 +3,31 @@
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
-                <div class="ui-g-12 ui-md-4">
-                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
-                        (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                <div class="ui-g-12 ui-md-3">
+                    <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+                                            (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown> -->
                 </div>
-                <div class="ui-g-6 ui-md-4 filter-container">
+                <div class="ui-g-4 ui-md-3">
                     <div style="position:relative">
-                        <input type="search" pInputText placeholder="Search by mã hóa đơn"
-                            (keyup)="dv.filter($event.target.value)">
+                        <p>Từ ngày</p>
+                        <!-- <input type="search" pInputText placeholder="Search by mã hóa đơn"
+                            (keyup)="dv.filter($event.target.value)"> -->
+                        <p-calendar [(ngModel)]="startDate" [showIcon]="true"></p-calendar>
                     </div>
                 </div>
-                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                <div class="ui-g-4 ui-md-3">
+                    <div style="position:relative">
+                        <p>Đến ngày</p>
+                        <p-calendar [(ngModel)]="endDate" [showIcon]="true"></p-calendar>
+                    </div>
+                </div>
+                <div class="ui-g-4 ui-md-3" style="text-align:right">
                     <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
                 </div>
+            </div>
+            <div style="text-align:center">
+                <p-button label="Tìm kiếm hóa đơn" (onClick)="searchBill($event)" icon="pi pi-search">
+                </p-button>
             </div>
         </div>
     </p-header>

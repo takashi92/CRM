@@ -72,4 +72,8 @@ export class BillSearchComponent implements OnInit {
     this.selectedBills = null;
   }
 
+  searchBill() {
+
+  }
+
 }
