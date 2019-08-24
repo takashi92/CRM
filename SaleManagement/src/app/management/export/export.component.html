@@ -43,8 +43,7 @@
 
 <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-4">
-        <p-calendar [(ngModel)]="date" [showIcon]="true" 
-        [style]="{'display': 'flex','height':'100%'}"></p-calendar>
+        <p-calendar [(ngModel)]="date" [showIcon]="true" [style]="{'display': 'flex','height':'100%'}"></p-calendar>
     </div>
 
     <div class="ui-g-12 ui-md-4">
@@ -81,18 +80,19 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
+
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-4">
-                <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()"
-                    label="Thêm hóa đơn"></button>
+                <button pButton type="button" label="Thêm sản phẩm" icon="pi pi-plus" class="ui-button-info"
+                    (click)="showDialogToAdd()"></button>
             </div>
             <div class="ui-g-12 ui-md-4">
-                <button type="button" pButton icon="pi pi-save" (click)="showDialogToAdd()"
-                    label="Lưu hóa đơn"></button>
+                <button pButton type="button" label="Lưu hóa đơn" icon="pi pi-save" class="ui-button-warning"
+                    (click)="pushImportedProduct()"></button>
             </div>
             <div class="ui-g-12 ui-md-4">
-                <button type="button" pButton icon="pi pi-times" (click)="showDialogToAdd()"
-                    label="Hủy hóa đơn"></button>
+                <button pButton type="button" label="Hủy hóa đơn" icon="pi pi-times" class="ui-button-danger"
+                    (click)="emptyImportedProduct()"></button>
             </div>
         </div>
     </ng-template>

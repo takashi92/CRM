@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Warehouse } from '../domain/warehouse';
+import { Product } from '../domain/product';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +11,7 @@ export class WarehouseService {
   getProductData() {
     return this.http.get<any>('assets/data/warehouse-sample.json')
       .toPromise()
-      .then(res => <Warehouse[]>res.data)
+      .then(res => <Product[]>res.data)
       .then(data => data);
   }
 }

@@ -1,1 +1,122 @@
-<p>import works!</p>
+<p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
+    (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary" let-rowData>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-4">
+                <button pButton type="button" label="Thêm sản phẩm" icon="pi pi-plus" class="ui-button-info"
+                    (click)="showDialogToAdd()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <button pButton type="button" label="Lưu đơn nhập hàng" icon="pi pi-save" class="ui-button-warning"
+                    (click)="pushImportedProduct()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <button pButton type="button" label="Làm mới đơn nhập hàng" icon="pi pi-times" class="ui-button-danger"
+                    (click)="emptyImportedProduct()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-table>
+<p-footer>
+
+</p-footer>
+
+
+<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    [closable]="true" [width]="1000">
+    <div *ngIf="product">
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="brand">Nhãn hàng</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.brand" [suggestions]="filteredBrand"
+                    (completeMethod)="filterBrand($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="name">Tên sản phẩm</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.name" [suggestions]="filteredName"
+                    (completeMethod)="filterName($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mã sản phẩm</label></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="code" [(ngModel)]="product.code" /></div>
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Chất liệu</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.material" [suggestions]="filteredMaterial"
+                    (completeMethod)="filterMaterial($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mô tả sản phẩm</label></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="description" [(ngModel)]="product.description" /></div>
+
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="color">Màu</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.color" [suggestions]="filteredColor"
+                    (completeMethod)="filterColor($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Kích cỡ</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.size" [suggestions]="filteredSize"
+                    (completeMethod)="filterSize($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Số lượng</label></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="number" [(ngModel)]="product.number" /></div>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Giá niêm yết</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <p-autoComplete [(ngModel)]="product.stickerPrice" [suggestions]="filteredStickerPrice"
+                    (completeMethod)="filterStickerPrice($event)" [dropdown]="true"></p-autoComplete>
+            </div>
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Giá nhập</label></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="importedPrice" [(ngModel)]="product.importedPrice" />
+            </div>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="note">Ghi chú</label></div>
+            <div class="ui-g-6 ui-md-4"> <textarea pInputTextarea id="note" [(ngModel)]="product.note"></textarea></div>
+
+            <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Tổng tiền nhập</label></div>
+            <div class="ui-g-6 ui-md-4">
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon" id="importAmount"
+                        [(ngModel)]="product.importAmount">{{product.importedPrice * product.number}}</span>
+                    <span class="ui-inputgroup-addon">.vnđ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button style="text-align:center" type="button" pButton icon="pi pi-check" (click)="save()"
+                label="Save"></button>
+            <button style="text-align:center" type="button" pButton icon="pi pi-times" (click)="delete()"
+                label="Clear"></button>
+        </div>
+    </p-footer>
+</p-dialog>

@@ -30,6 +30,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { BillSearchComponent } from './management/bill-search/bill-search.component';
 import { DataViewModule } from 'primeng/dataview';
 import { PanelModule } from 'primeng/panel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +64,8 @@ import { PanelModule } from 'primeng/panel';
     CalendarModule,
     DataViewModule,
     PanelModule,
+    InputTextareaModule,
+    AutoCompleteModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },

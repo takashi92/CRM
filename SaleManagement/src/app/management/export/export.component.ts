@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { Warehouse } from 'src/app/domain/warehouse';
+import { Product } from 'src/app/domain/product';
 
 import { WarehouseService } from 'src/app/services/warehouse.service';
 @Component({
@@ -9,9 +9,7 @@ import { WarehouseService } from 'src/app/services/warehouse.service';
   styleUrls: ['./export.component.scss']
 })
 export class ExportComponent implements OnInit {
-
   selectedProduct: string = 'Chọn mã hàng';
-  // products: Warehouse[];
   products: SelectItem[];
   items: SelectItem[];
   date: Date;

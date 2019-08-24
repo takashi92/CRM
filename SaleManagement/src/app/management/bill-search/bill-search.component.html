@@ -1,33 +1,32 @@
-<p-dataView #dv [value]="billSearchs" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="billId"
-    [sortField]="sortField" [sortOrder]="sortOrder">
+<p-dataView #dv [value]="billSearchs" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="billId" [sortField]="sortField" [sortOrder]="sortOrder">
     <p-header>
         <div class="ui-helper-clearfix">
             <div class="ui-g">
-                <div class="ui-g-12 ui-md-3">
-                    <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
-                                            (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown> -->
-                </div>
-                <div class="ui-g-4 ui-md-3">
+                <!-- <div class="ui-g-12 ui-md-3">
+                                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+                                                            (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                                </div> -->
+                <div class="ui-g-3 ui-md-2" style="text-align:right"><label for="size">Từ ngày</label></div>
+                <div class="ui-g-3 ui-md-2">
                     <div style="position:relative">
-                        <p>Từ ngày</p>
                         <!-- <input type="search" pInputText placeholder="Search by mã hóa đơn"
                             (keyup)="dv.filter($event.target.value)"> -->
                         <p-calendar [(ngModel)]="startDate" [showIcon]="true"></p-calendar>
                     </div>
                 </div>
-                <div class="ui-g-4 ui-md-3">
+                <div class="ui-g-3 ui-md-2" style="text-align:right"><label for="size">Đến ngày</label></div>
+                <div class="ui-g-3 ui-md-2">
                     <div style="position:relative">
-                        <p>Đến ngày</p>
                         <p-calendar [(ngModel)]="endDate" [showIcon]="true"></p-calendar>
                     </div>
                 </div>
-                <div class="ui-g-4 ui-md-3" style="text-align:right">
+                <div class="ui-g-3 ui-md-2" style="text-align:center">
+                    <p-button label="Tìm kiếm hóa đơn" (onClick)="searchBill($event)" icon="pi pi-search">
+                    </p-button>
+                </div>
+                <div class="ui-g-3 ui-md-2" style="text-align:right">
                     <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
                 </div>
-            </div>
-            <div style="text-align:center">
-                <p-button label="Tìm kiếm hóa đơn" (onClick)="searchBill($event)" icon="pi pi-search">
-                </p-button>
             </div>
         </div>
     </p-header>
@@ -59,15 +58,13 @@
                 <!-- <img src="" width="60"> -->
                 <div class="car-detail">{{billSearch.amount}} - {{billSearch.createDate}}</div>
                 <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)"
-                    style="margin-top:0"></button>
+                <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)" style="margin-top:0"></button>
             </p-panel>
         </div>
     </ng-template>
 </p-dataView>
 
-<p-dialog header="Bill Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-    (onAfterHide)="onDialogHide()">
+<p-dialog header="Bill Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" (onAfterHide)="onDialogHide()">
     <p-table [columns]="cols" [value]="selectedBills" selectionMode="single" [paginator]="true" rows="10">
         <ng-template pTemplate="header" let-columns>
             <tr>
