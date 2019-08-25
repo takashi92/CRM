@@ -1,69 +1,74 @@
-<h3>Hóa đơn bán hàng</h3>
-<div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-        <p>Nhãn hàng</p>
-        <p-dropdown [options]="products" [(ngModel)]="selectedProduct" filter="true">
-            <ng-template let-item pTemplate="selectedItem">
-                <i class="pi pi-shopping-cart"></i>
-                <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
-            </ng-template>
-            <ng-template let-product pTemplate="item">
-                <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
-                    <i class="pi pi-shopping-cart"></i>
-                    <div style="font-size:14px;float:right;margin-top:4px">{{product.label}}</div>
+<p-header>
+    <h3>Tìm kiếm sản phẩm</h3>
+    <div class="ui-helper-clearfix">
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6 ui-md-3">
+                <p-autoComplete [(ngModel)]="product.brand" [suggestions]="filteredBrand"
+                    (completeMethod)="filterBrand($event)" [dropdown]="true" placeholder="Nhãn hàng"></p-autoComplete>
+            </div>
+            <div class="ui-g-6 ui-md-3">
+                <p-autoComplete [(ngModel)]="product.name" [suggestions]="filteredName"
+                    (completeMethod)="filterName($event)" [dropdown]="true" placeholder="Tên sản phẩm"></p-autoComplete>
+            </div>
+            <div class="ui-g-6 ui-md-3">
+                <p-autoComplete [(ngModel)]="product.color" [suggestions]="filteredColor"
+                    (completeMethod)="filterColor($event)" [dropdown]="true" placeholder="Màu"></p-autoComplete>
+            </div>
+            <div class="ui-g-6 ui-md-3">
+                <p-autoComplete [(ngModel)]="product.size" [suggestions]="filteredSize"
+                    (completeMethod)="filterSize($event)" [dropdown]="true" placeholder="Kích cỡ"></p-autoComplete>
+            </div>
+        </div>
+    </div>
+</p-header>
+<div *ngIf="products">
+    <p-carousel headerText="Kết quả tìm kiếm" [value]="products">
+        <ng-template let-product pTemplate="item">
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12"><img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">
+                    </div>
                 </div>
-            </ng-template>
-        </p-dropdown>
-    </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Nhãn hàng</div>
+                    <div class="ui-grid-col-6">{{product.brand}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Tên sản phẩm</div>
+                    <div class="ui-grid-col-6">{{product.name}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Màu</div>
+                    <div class="ui-grid-col-6">{{product.color}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Kích cỡ</div>
+                    <div class="ui-grid-col-6">{{product.size}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Chất liệu</div>
+                    <div class="ui-grid-col-6">{{product.material}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Số lượng</div>
+                    <div class="ui-grid-col-6">{{product.number}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">Giá niêm yết</div>
+                    <div class="ui-grid-col-6">{{product.stickerPrice}}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12">
+                        <button type="button" pButton icon="pi pi-shopping-cart"
+                            (click)="selectProduct(product)"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
 </div>
 
-<div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-tag"></i></span>
-            <input type="text" pInputText placeholder="Tên hàng">
-        </div>
-    </div>
-
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-dollar"></i></span>
-            <input type="text" pInputText placeholder="Đơn giá">
-            <span class="ui-inputgroup-addon">.00</span>
-        </div>
-    </div>
-
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-plus"></i></span>
-            <input type="text" pInputText placeholder="Số lượng">
-        </div>
-    </div>
-</div>
-
-<div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-4">
-        <p-calendar [(ngModel)]="date" [showIcon]="true" [style]="{'display': 'flex','height':'100%'}"></p-calendar>
-    </div>
-
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-bell"></i></span>
-            <input type="text" pInputText placeholder="Giảm giá">
-            <span class="ui-inputgroup-addon">%</span>
-        </div>
-    </div>
-
-    <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <span class="ui-inputgroup-addon"><i class="pi pi-check"></i></span>
-            <input type="text" pInputText placeholder="Thành tiền">
-        </div>
-    </div>
-</div>
-
-
-<p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
+<!-- <p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
     (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -96,4 +101,4 @@
             </div>
         </div>
     </ng-template>
-</p-table>
+</p-table> -->

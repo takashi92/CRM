@@ -32,6 +32,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { PanelModule } from 'primeng/panel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CarouselModule } from 'primeng/carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     PanelModule,
     InputTextareaModule,
     AutoCompleteModule,
+    CarouselModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },
