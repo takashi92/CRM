@@ -1,86 +1,131 @@
-<p-dataView #dv [value]="billSearchs" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="billId" [sortField]="sortField" [sortOrder]="sortOrder">
-    <p-header>
-        <div class="ui-helper-clearfix">
-            <div class="ui-g">
-                <!-- <div class="ui-g-12 ui-md-3">
+<p-dataView
+  #dv
+  [value]="billSearchs"
+  [paginator]="true"
+  [rows]="20"
+  paginatorPosition="both"
+  filterBy="billId"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+>
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <!-- <div class="ui-g-12 ui-md-3">
                                     <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
                                                             (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
                                 </div> -->
-                <div class="ui-g-3 ui-md-2" style="text-align:right"><label for="size">Từ ngày</label></div>
-                <div class="ui-g-3 ui-md-2">
-                    <div style="position:relative">
-                        <!-- <input type="search" pInputText placeholder="Search by mã hóa đơn"
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <!-- <input type="search" pInputText placeholder="Search by mã hóa đơn"
                             (keyup)="dv.filter($event.target.value)"> -->
-                        <p-calendar [(ngModel)]="startDate" [showIcon]="true"></p-calendar>
-                    </div>
-                </div>
-                <div class="ui-g-3 ui-md-2" style="text-align:right"><label for="size">Đến ngày</label></div>
-                <div class="ui-g-3 ui-md-2">
-                    <div style="position:relative">
-                        <p-calendar [(ngModel)]="endDate" [showIcon]="true"></p-calendar>
-                    </div>
-                </div>
-                <div class="ui-g-3 ui-md-2" style="text-align:center">
-                    <p-button label="Tìm kiếm hóa đơn" (onClick)="searchBill($event)" icon="pi pi-search">
-                    </p-button>
-                </div>
-                <div class="ui-g-3 ui-md-2" style="text-align:right">
-                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-                </div>
-            </div>
+          <p-calendar
+            [(ngModel)]="startDate"
+            [showIcon]="true"
+            placeholder="Từ ngày"
+          ></p-calendar>
         </div>
-    </p-header>
-    <ng-template let-billSearch pTemplate="listItem">
-        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
-            <div class="ui-g-12 ui-md-3" style="text-align:center">
-                <!-- <img src=""> -->
-            </div>
-            <div class="ui-g-12 ui-md-8 car-details">
-                <div class="ui-g">
-                    <div class="ui-g-2 ui-sm-6">Mã: </div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{billSearch.billId}}</b></div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <p-calendar
+            [(ngModel)]="endDate"
+            [showIcon]="true"
+            placeholder="Đến ngày"
+          ></p-calendar>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align:center">
+          <p-button
+            label="Tìm kiếm hóa đơn"
+            (onClick)="searchBill($event)"
+            icon="pi pi-search"
+          >
+          </p-button>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-1" style="text-align:center">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <ng-template let-billSearch pTemplate="listItem">
+    <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+      <div class="ui-g-12 ui-md-3" style="text-align:center">
+        <!-- <img src=""> -->
+      </div>
+      <div class="ui-g-12 ui-md-8 car-details">
+        <div class="ui-g">
+          <div class="ui-g-2 ui-sm-6">Mã:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ billSearch.billId }}</b>
+          </div>
 
-                    <div class="ui-g-2 ui-sm-6">Tổng tiền: </div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{billSearch.amount}}</b></div>
+          <div class="ui-g-2 ui-sm-6">Tổng tiền:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ billSearch.amount }}</b>
+          </div>
 
-                    <div class="ui-g-2 ui-sm-6">Ngày lập:</div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{billSearch.createDate}}</b></div>
-                </div>
-            </div>
-            <div class="ui-g-12 ui-md-1 search-icon">
-                <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)"></button>
-            </div>
+          <div class="ui-g-2 ui-sm-6">Ngày lập:</div>
+          <div class="ui-g-10 ui-sm-6">
+            <b>{{ billSearch.createDate }}</b>
+          </div>
         </div>
-    </ng-template>
-    <ng-template let-billSearch pTemplate="gridItem">
-        <div style="padding:.5em" class="ui-g-12 ui-md-3">
-            <p-panel [style]="{'text-align':'center'}">
-                <!-- <img src="" width="60"> -->
-                <div class="car-detail">{{billSearch.amount}} - {{billSearch.createDate}}</div>
-                <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)" style="margin-top:0"></button>
-            </p-panel>
+      </div>
+      <div class="ui-g-12 ui-md-1 search-icon">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-search"
+          (click)="selectBill($event, billSearch)"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template let-billSearch pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [style]="{ 'text-align': 'center' }">
+        <!-- <img src="" width="60"> -->
+        <div class="car-detail">
+          {{ billSearch.amount }} - {{ billSearch.createDate }}
         </div>
-    </ng-template>
+        <hr class="ui-widget-content" style="border-top:0" />
+        <button
+          pButton
+          type="button"
+          icon="pi pi-search"
+          (click)="selectBill($event, billSearch)"
+          style="margin-top:0"
+        ></button>
+      </p-panel>
+    </div>
+  </ng-template>
 </p-dataView>
 
-<p-dialog header="Bill Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" (onAfterHide)="onDialogHide()">
-    <p-table [columns]="cols" [value]="selectedBills" selectionMode="single" [paginator]="true" rows="10">
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of columns">
-                    {{col.header}}
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-                <td *ngFor="let col of columns">
-                    {{rowData[col.field]}}
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-
-
+<p-dialog
+  header="Bill Details"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  (onAfterHide)="onDialogHide()"
+>
+  <p-table
+    [columns]="cols"
+    [value]="selectedBills"
+    selectionMode="single"
+    [paginator]="true"
+    rows="10"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </p-dialog>
