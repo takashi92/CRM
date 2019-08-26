@@ -16,8 +16,8 @@ import org.hibernate.annotations.Parameter;
 public class Storage implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Integer productId;
-	private Products products;
+	private int productId;
+	private Product product;
 	private Integer quantity;
 	private Double price;
 	private String note;
@@ -27,12 +27,12 @@ public class Storage implements java.io.Serializable {
 	public Storage() {
 	}
 
-	public Storage(Products products) {
-		this.products = products;
+	public Storage(Product product) {
+		this.product = product;
 	}
 
-	public Storage(Products products, Integer quantity, Double price, String note, Long created, Long updated) {
-		this.products = products;
+	public Storage(Product product, Integer quantity, Double price, String note, Long created, Long updated) {
+		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
 		this.note = note;
@@ -40,27 +40,27 @@ public class Storage implements java.io.Serializable {
 		this.updated = updated;
 	}
 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "products"))
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "product"))
 	@Id
 	@GeneratedValue(generator = "generator")
 
 	@Column(name = "product_id", unique = true, nullable = false)
-	public Integer getProductId() {
+	public int getProductId() {
 		return this.productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	public Products getProducts() {
-		return this.products;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setProducts(Products products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Column(name = "quantity")

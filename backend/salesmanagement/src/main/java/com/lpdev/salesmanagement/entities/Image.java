@@ -1,37 +1,36 @@
 package com.lpdev.salesmanagement.entities;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "brand", catalog = "sales_management")
-public class Brand implements java.io.Serializable {
+@Table(name = "image", catalog = "sales_management")
+public class Image implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String name;
+	private Product product;
+	private String link;
 	private String note;
 	private Long created;
 	private Long updated;
-	private Set<Product> products = new HashSet<Product>(0);
 
-	public Brand() {
+	public Image() {
 	}
 
-	public Brand(String name, String note, Long created, Long updated, Set<Product> products) {
-		this.name = name;
+	public Image(Product product, String link, String note, Long created, Long updated) {
+		this.product = product;
+		this.link = link;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
-		this.products = products;
 	}
 
 	@Id
@@ -46,13 +45,23 @@ public class Brand implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name")
-	public String getName() {
-		return this.name;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id")
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	@Column(name = "link")
+	public String getLink() {
+		return this.link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	@Column(name = "note")
@@ -80,15 +89,6 @@ public class Brand implements java.io.Serializable {
 
 	public void setUpdated(Long updated) {
 		this.updated = updated;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
 	}
 
 }

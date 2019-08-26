@@ -8,22 +8,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Products;
-import com.lpdev.salesmanagement.repositories.ProductsRepository;
+import com.lpdev.salesmanagement.entities.Product;
+import com.lpdev.salesmanagement.repositories.ProductRepository;
 
 @Service
-public class ProductsService {
+public class ProductService {
 
-	private static final Log log = LogFactory.getLog(ProductsService.class);
+	private static final Log log = LogFactory.getLog(ProductService.class);
 
 	@Autowired
-	private ProductsRepository productsRepository;
+	private ProductRepository productRepository;
 
-	public void persist(Products transientInstance) {
+	public void persist(Product transientInstance) {
 		log.debug("persisting Products instance");
 		try {
 			transientInstance.setCreated(new Date().getTime());
-			productsRepository.save(transientInstance);
+			productRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -31,10 +31,10 @@ public class ProductsService {
 		}
 	}
 
-	public void remove(Products persistentInstance) {
+	public void remove(Product persistentInstance) {
 		log.debug("removing Products instance");
 		try {
-			productsRepository.delete(persistentInstance);
+			productRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -42,10 +42,10 @@ public class ProductsService {
 		}
 	}
 
-	public Products merge(Products detachedInstance) {
+	public Product merge(Product detachedInstance) {
 		log.debug("merging Products instance");
 		try {
-			Products result = productsRepository.saveAndFlush(detachedInstance);
+			Product result = productRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -54,10 +54,10 @@ public class ProductsService {
 		}
 	}
 
-	public Products findById(Integer id) {
+	public Product findById(Integer id) {
 		log.debug("getting Products instance with id: " + id);
 		try {
-			Products instance = productsRepository.getOne(id);
+			Product instance = productRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
@@ -66,9 +66,9 @@ public class ProductsService {
 		}
 	}
 
-	public List<Products> findAll() {
+	public List<Product> findAll() {
 		try {
-			List<Products> products = productsRepository.findAll();
+			List<Product> products = productRepository.findAll();
 			log.debug("get successful");
 			return products;
 		} catch (RuntimeException re) {

@@ -7,22 +7,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Categories;
-import com.lpdev.salesmanagement.repositories.CategoriesRepository;
+import com.lpdev.salesmanagement.entities.Category;
+import com.lpdev.salesmanagement.repositories.CategoryRepository;
 
 @Service
-public class CategoriesService {
+public class CategoryService {
 
-	private static final Log log = LogFactory.getLog(CategoriesService.class);
+	private static final Log log = LogFactory.getLog(CategoryService.class);
 
 	@Autowired
-	private CategoriesRepository categoriesRepository;
+	private CategoryRepository categoryRepository;
 
-	public void persist(Categories transientInstance) {
+	public void persist(Category transientInstance) {
 		log.debug("persisting Categories instance");
 		try {
 			transientInstance.setCreated(new Date().getTime());
-			categoriesRepository.save(transientInstance);
+			categoryRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -30,10 +30,10 @@ public class CategoriesService {
 		}
 	}
 
-	public void remove(Categories persistentInstance) {
+	public void remove(Category persistentInstance) {
 		log.debug("removing Categories instance");
 		try {
-			categoriesRepository.delete(persistentInstance);
+			categoryRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -41,10 +41,10 @@ public class CategoriesService {
 		}
 	}
 
-	public Categories merge(Categories detachedInstance) {
+	public Category merge(Category detachedInstance) {
 		log.debug("merging Categories instance");
 		try {
-			Categories result = categoriesRepository.saveAndFlush(detachedInstance);
+			Category result = categoryRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -53,10 +53,10 @@ public class CategoriesService {
 		}
 	}
 
-	public Categories findById(Integer id) {
+	public Category findById(Integer id) {
 		log.debug("getting Categories instance with id: " + id);
 		try {
-			Categories instance = categoriesRepository.getOne(id);
+			Category instance = categoryRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

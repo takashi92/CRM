@@ -13,7 +13,7 @@ import com.lpdev.salesmanagement.repositories.BrandRepository;
 @Service
 public class BrandService {
 
-	private static final Log log = LogFactory.getLog(CategoriesService.class);
+	private static final Log log = LogFactory.getLog(CategoryService.class);
 
 	@Autowired
 	private BrandRepository brandRepository;

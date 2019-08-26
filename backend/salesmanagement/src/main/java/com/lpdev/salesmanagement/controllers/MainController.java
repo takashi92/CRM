@@ -7,47 +7,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lpdev.salesmanagement.entities.Categories;
-import com.lpdev.salesmanagement.entities.Properties;
-import com.lpdev.salesmanagement.services.CategoriesService;
-import com.lpdev.salesmanagement.services.PropertiesService;
+import com.lpdev.salesmanagement.entities.Category;
+import com.lpdev.salesmanagement.services.CategoryService;
+import com.lpdev.salesmanagement.services.PropertyService;
 
 @RestController
 @RequestMapping(value = "/sales/init")
 public class MainController {
 
 	@Autowired
-	CategoriesService categoriesService;
+	CategoryService categoriesService;
 
 	@Autowired
-	PropertiesService propertiesService;
+	PropertyService propertiesService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> init() {
 
-		Categories category = new Categories();
+		Category category = new Category();
 		category.setName("Đồ Áo");
 		categoriesService.persist(category);
 
-		Properties property = new Properties();
-		property.setCategories(category);
-		property.setCode("material");
-		propertiesService.persist(property);
-
-		property = new Properties();
-		property.setCategories(category);
-		property.setCode("description");
-		propertiesService.persist(property);
-
-		property = new Properties();
-		property.setCategories(category);
-		property.setCode("color");
-		propertiesService.persist(property);
-
-		property = new Properties();
-		property.setCategories(category);
-		property.setCode("size");
-		propertiesService.persist(property);
+//		Property property = new Property();
+//		property.setCode("material");
+//		propertiesService.persist(property);
+//
+//		property = new Property();
+//		property.setCode("description");
+//		propertiesService.persist(property);
+//
+//		property = new Property();
+//		property.setCode("color");
+//		propertiesService.persist(property);
+//
+//		property = new Property();
+//		property.setCode("size");
+//		propertiesService.persist(property);
 
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}

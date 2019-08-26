@@ -5,21 +5,21 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Bills;
-import com.lpdev.salesmanagement.repositories.BillsRepository;
+import com.lpdev.salesmanagement.entities.Bill;
+import com.lpdev.salesmanagement.repositories.BillRepository;
 
 @Service
-public class BillsService {
+public class BillService {
 
-	private static final Log log = LogFactory.getLog(BillsService.class);
+	private static final Log log = LogFactory.getLog(BillService.class);
 
 	@Autowired
-	private BillsRepository billsRepository;
+	private BillRepository billRepository;
 
-	public void persist(Bills transientInstance) {
+	public void persist(Bill transientInstance) {
 		log.debug("persisting Bills instance");
 		try {
-			billsRepository.save(transientInstance);
+			billRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -27,10 +27,10 @@ public class BillsService {
 		}
 	}
 
-	public void remove(Bills persistentInstance) {
+	public void remove(Bill persistentInstance) {
 		log.debug("removing Bills instance");
 		try {
-			billsRepository.delete(persistentInstance);
+			billRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -38,10 +38,10 @@ public class BillsService {
 		}
 	}
 
-	public Bills merge(Bills detachedInstance) {
+	public Bill merge(Bill detachedInstance) {
 		log.debug("merging Bills instance");
 		try {
-			Bills result = billsRepository.saveAndFlush(detachedInstance);
+			Bill result = billRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -50,10 +50,10 @@ public class BillsService {
 		}
 	}
 
-	public Bills findById(Integer id) {
+	public Bill findById(Integer id) {
 		log.debug("getting Bills instance with id: " + id);
 		try {
-			Bills instance = billsRepository.getOne(id);
+			Bill instance = billRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

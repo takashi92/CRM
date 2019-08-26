@@ -8,30 +8,32 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "brand", catalog = "sales_management")
-public class Brand implements java.io.Serializable {
+@Table(name = "bill", catalog = "sales_management")
+public class Bill implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String name;
+	private Customer customer;
 	private String note;
 	private Long created;
 	private Long updated;
-	private Set<Product> products = new HashSet<Product>(0);
+	private Set<BillDetail> billDetails = new HashSet<BillDetail>(0);
 
-	public Brand() {
+	public Bill() {
 	}
 
-	public Brand(String name, String note, Long created, Long updated, Set<Product> products) {
-		this.name = name;
+	public Bill(Customer customer, String note, Long created, Long updated, Set<BillDetail> billDetails) {
+		this.customer = customer;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
-		this.products = products;
+		this.billDetails = billDetails;
 	}
 
 	@Id
@@ -46,13 +48,14 @@ public class Brand implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name")
-	public String getName() {
-		return this.name;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_id")
+	public Customer getCustomer() {
+		return this.customer;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Column(name = "note")
@@ -82,13 +85,13 @@ public class Brand implements java.io.Serializable {
 		this.updated = updated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
-	public Set<Product> getProducts() {
-		return this.products;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bill")
+	public Set<BillDetail> getBillDetails() {
+		return this.billDetails;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setBillDetails(Set<BillDetail> billDetails) {
+		this.billDetails = billDetails;
 	}
 
 }

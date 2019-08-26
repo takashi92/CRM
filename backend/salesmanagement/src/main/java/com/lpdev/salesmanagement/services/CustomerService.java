@@ -1,32 +1,25 @@
 package com.lpdev.salesmanagement.services;
-// Generated Aug 7, 2019 9:03:04 PM by Hibernate Tools 4.3.5.Final
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Customers;
-import com.lpdev.salesmanagement.repositories.CustomersRepository;
+import com.lpdev.salesmanagement.entities.Customer;
+import com.lpdev.salesmanagement.repositories.CustomerRepository;
 
-/**
- * Home object for domain model class Customers.
- * 
- * @see com.lpdev.salesmanagement.entities.Customers
- * @author Hibernate Tools
- */
 @Service
-public class CustomersService {
+public class CustomerService {
 
-	private static final Log log = LogFactory.getLog(CustomersService.class);
+	private static final Log log = LogFactory.getLog(CustomerService.class);
 
 	@Autowired
-	private CustomersRepository customersRepository;
+	private CustomerRepository customerRepository;
 
-	public void persist(Customers transientInstance) {
+	public void persist(Customer transientInstance) {
 		log.debug("persisting Customers instance");
 		try {
-			customersRepository.save(transientInstance);
+			customerRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -34,10 +27,10 @@ public class CustomersService {
 		}
 	}
 
-	public void remove(Customers persistentInstance) {
+	public void remove(Customer persistentInstance) {
 		log.debug("removing Customers instance");
 		try {
-			customersRepository.delete(persistentInstance);
+			customerRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -45,10 +38,10 @@ public class CustomersService {
 		}
 	}
 
-	public Customers merge(Customers detachedInstance) {
+	public Customer merge(Customer detachedInstance) {
 		log.debug("merging Customers instance");
 		try {
-			Customers result = customersRepository.saveAndFlush(detachedInstance);
+			Customer result = customerRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,10 +50,10 @@ public class CustomersService {
 		}
 	}
 
-	public Customers findById(Integer id) {
+	public Customer findById(Integer id) {
 		log.debug("getting Customers instance with id: " + id);
 		try {
-			Customers instance = customersRepository.getOne(id);
+			Customer instance = customerRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

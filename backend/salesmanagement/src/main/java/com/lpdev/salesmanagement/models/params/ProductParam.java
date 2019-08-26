@@ -1,5 +1,8 @@
 package com.lpdev.salesmanagement.models.params;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProductParam {
 
 	private int id;
@@ -7,7 +10,7 @@ public class ProductParam {
 	private String name;
 	private String code;
 	private String barCode;
-	private String properties;
+	private Map<String, String> properties = new HashMap<String, String>();
 	private String note;
 	private Long created;
 	private Long updated;
@@ -52,11 +55,11 @@ public class ProductParam {
 		this.barCode = barCode;
 	}
 
-	public String getProperties() {
+	public Map<String, String> getProperties() {
 		return properties;
 	}
 
-	public void setProperties(String properties) {
+	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
 

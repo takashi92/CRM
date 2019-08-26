@@ -12,26 +12,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "brand", catalog = "sales_management")
-public class Brand implements java.io.Serializable {
+@Table(name = "property", catalog = "sales_management")
+public class Property implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private String code;
 	private String name;
 	private String note;
 	private Long created;
 	private Long updated;
-	private Set<Product> products = new HashSet<Product>(0);
+	private Set<ProductDetail> productDetails = new HashSet<ProductDetail>(0);
 
-	public Brand() {
+	public Property() {
 	}
 
-	public Brand(String name, String note, Long created, Long updated, Set<Product> products) {
+	public Property(String code, String name, String note, Long created, Long updated,
+			Set<ProductDetail> productDetails) {
+		this.code = code;
 		this.name = name;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
-		this.products = products;
+		this.productDetails = productDetails;
 	}
 
 	@Id
@@ -44,6 +47,15 @@ public class Brand implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Column(name = "code")
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Column(name = "name")
@@ -82,13 +94,13 @@ public class Brand implements java.io.Serializable {
 		this.updated = updated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
-	public Set<Product> getProducts() {
-		return this.products;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "property")
+	public Set<ProductDetail> getProductDetails() {
+		return this.productDetails;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setProductDetails(Set<ProductDetail> productDetails) {
+		this.productDetails = productDetails;
 	}
 
 }

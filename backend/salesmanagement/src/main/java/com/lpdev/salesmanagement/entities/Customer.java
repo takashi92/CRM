@@ -12,26 +12,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "brand", catalog = "sales_management")
-public class Brand implements java.io.Serializable {
+@Table(name = "customer", catalog = "sales_management")
+public class Customer implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
+	private String address;
 	private String note;
 	private Long created;
 	private Long updated;
-	private Set<Product> products = new HashSet<Product>(0);
+	private Set<Bill> bills = new HashSet<Bill>(0);
 
-	public Brand() {
+	public Customer() {
 	}
 
-	public Brand(String name, String note, Long created, Long updated, Set<Product> products) {
+	public Customer(String name, String address, String note, Long created, Long updated, Set<Bill> bills) {
 		this.name = name;
+		this.address = address;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
-		this.products = products;
+		this.bills = bills;
 	}
 
 	@Id
@@ -53,6 +55,15 @@ public class Brand implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Column(name = "address")
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Column(name = "note")
@@ -82,13 +93,13 @@ public class Brand implements java.io.Serializable {
 		this.updated = updated;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
-	public Set<Product> getProducts() {
-		return this.products;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Bill> getBills() {
+		return this.bills;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setBills(Set<Bill> bills) {
+		this.bills = bills;
 	}
 
 }

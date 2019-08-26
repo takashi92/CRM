@@ -16,7 +16,7 @@ public class Supply implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private SupplyId id;
-	private Products products;
+	private Product product;
 	private Supplier supplier;
 	private Double price;
 	private Integer quantity;
@@ -27,16 +27,16 @@ public class Supply implements java.io.Serializable {
 	public Supply() {
 	}
 
-	public Supply(SupplyId id, Products products, Supplier supplier) {
+	public Supply(SupplyId id, Product product, Supplier supplier) {
 		this.id = id;
-		this.products = products;
+		this.product = product;
 		this.supplier = supplier;
 	}
 
-	public Supply(SupplyId id, Products products, Supplier supplier, Double price, Integer quantity, String note,
+	public Supply(SupplyId id, Product product, Supplier supplier, Double price, Integer quantity, String note,
 			Long created, Long updated) {
 		this.id = id;
-		this.products = products;
+		this.product = product;
 		this.supplier = supplier;
 		this.price = price;
 		this.quantity = quantity;
@@ -60,12 +60,12 @@ public class Supply implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false, insertable = false, updatable = false)
-	public Products getProducts() {
-		return this.products;
+	public Product getProduct() {
+		return this.product;
 	}
 
-	public void setProducts(Products products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

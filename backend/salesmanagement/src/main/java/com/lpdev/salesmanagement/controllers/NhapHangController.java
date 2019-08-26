@@ -1,7 +1,11 @@
 package com.lpdev.salesmanagement.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lpdev.salesmanagement.entities.Brand;
-import com.lpdev.salesmanagement.entities.Products;
+import com.lpdev.salesmanagement.entities.Product;
+import com.lpdev.salesmanagement.entities.ProductDetail;
+import com.lpdev.salesmanagement.entities.ProductDetailId;
+import com.lpdev.salesmanagement.entities.Property;
 import com.lpdev.salesmanagement.models.params.ProductParam;
 import com.lpdev.salesmanagement.services.BrandService;
-import com.lpdev.salesmanagement.services.ProductsService;
+import com.lpdev.salesmanagement.services.ProductDetailService;
+import com.lpdev.salesmanagement.services.ProductService;
+import com.lpdev.salesmanagement.services.PropertyService;
 
 @RestController
 @RequestMapping(value = "/lpdev")
@@ -25,7 +34,13 @@ public class NhapHangController {
 	BrandService brandService;
 
 	@Autowired
-	ProductsService productsService;
+	ProductService productService;
+
+	@Autowired
+	PropertyService propertyService;
+
+	@Autowired
+	ProductDetailService productDetailService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "import")
 	public ResponseEntity<Void> importHang(@RequestBody ProductParam productParam) {
@@ -38,14 +53,29 @@ public class NhapHangController {
 			brandService.persist(brand);
 		}
 
-		Products product = new Products();
+		Product product = new Product();
 		product.setBrand(brand);
 		product.setName(productParam.getName());
 		product.setCode(productParam.getCode());
 		product.setBarCode(productParam.getBarCode());
-		product.setProperties(productParam.getProperties());
 		product.setNote(productParam.getNote());
-		productsService.persist(product);
+		productService.persist(product);
+
+		productParam.getProperties().forEach((key, value) -> {
+			Property property = propertyService.findByName(productParam.getBrandName());
+
+			if (property == null) {
+				property = new Property();
+				property.setCode(key);
+				propertyService.persist(property);
+			}
+
+			ProductDetail productDetail = new ProductDetail();
+			productDetail.setId(new ProductDetailId(product.getId(), property.getId()));
+			productDetail.setName(value);
+
+			productDetailService.persist(productDetail);
+		});
 
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
@@ -54,7 +84,7 @@ public class NhapHangController {
 	public ResponseEntity<List<ProductParam>> warehouse() {
 
 		List<ProductParam> productParams = new ArrayList<ProductParam>();
-		List<Products> products = productsService.findAll();
+		List<Product> products = productService.findAll();
 		products.forEach(product -> {
 			ProductParam productParam = new ProductParam();
 			productParam.setId(product.getId());
@@ -62,7 +92,12 @@ public class NhapHangController {
 			productParam.setName(product.getName());
 			productParam.setCode(product.getCode());
 			productParam.setBarCode(product.getBarCode());
-			productParam.setProperties(product.getProperties());
+			Map<String, String> properties = new HashMap<String, String>();
+			Set<ProductDetail> productDetails = product.getProductDetails();
+			productDetails.forEach(productDetail -> {
+				properties.put(productDetail.getProperty().getCode(), productDetail.getName());
+			});
+			productParam.setProperties(properties);
 			productParam.setNote(product.getNote());
 			productParam.setCreated(product.getCreated());
 			productParam.setUpdated(product.getUpdated());

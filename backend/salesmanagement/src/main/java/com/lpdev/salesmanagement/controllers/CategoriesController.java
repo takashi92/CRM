@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lpdev.salesmanagement.entities.Categories;
+import com.lpdev.salesmanagement.entities.Category;
 import com.lpdev.salesmanagement.models.params.CategoryParam;
-import com.lpdev.salesmanagement.services.CategoriesService;
+import com.lpdev.salesmanagement.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/sales/categories")
 public class CategoriesController {
 
 	@Autowired
-	CategoriesService categoriesService;
+	CategoryService categoriesService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> add(CategoryParam categoryParam) {
-		Categories category = new Categories();
+		Category category = new Category();
 		category.setName("Đồ Áo");
 		categoriesService.persist(category);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);

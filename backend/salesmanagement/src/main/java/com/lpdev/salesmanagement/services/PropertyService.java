@@ -7,22 +7,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.Properties;
-import com.lpdev.salesmanagement.repositories.PropertiesRepository;
+import com.lpdev.salesmanagement.entities.Property;
+import com.lpdev.salesmanagement.repositories.PropertyRepository;
 
 @Service
-public class PropertiesService {
+public class PropertyService {
 
-	private static final Log log = LogFactory.getLog(PropertiesService.class);
+	private static final Log log = LogFactory.getLog(PropertyService.class);
 
 	@Autowired
-	private PropertiesRepository propertiesRepository;
+	private PropertyRepository propertyRepository;
 
-	public void persist(Properties transientInstance) {
+	public void persist(Property transientInstance) {
 		log.debug("persisting Properties instance");
 		try {
 			transientInstance.setCreated(new Date().getTime());
-			propertiesRepository.save(transientInstance);
+			propertyRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -30,10 +30,10 @@ public class PropertiesService {
 		}
 	}
 
-	public void remove(Properties persistentInstance) {
+	public void remove(Property persistentInstance) {
 		log.debug("removing Properties instance");
 		try {
-			propertiesRepository.delete(persistentInstance);
+			propertyRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -41,10 +41,10 @@ public class PropertiesService {
 		}
 	}
 
-	public Properties merge(Properties detachedInstance) {
+	public Property merge(Property detachedInstance) {
 		log.debug("merging Properties instance");
 		try {
-			Properties result = propertiesRepository.saveAndFlush(detachedInstance);
+			Property result = propertyRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -53,10 +53,22 @@ public class PropertiesService {
 		}
 	}
 
-	public Properties findById(Integer id) {
+	public Property findById(Integer id) {
 		log.debug("getting Properties instance with id: " + id);
 		try {
-			Properties instance = propertiesRepository.getOne(id);
+			Property instance = propertyRepository.getOne(id);
+			log.debug("get successful");
+			return instance;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+
+	public Property findByName(String name) {
+		log.debug("getting Property instance with name: " + name);
+		try {
+			Property instance = propertyRepository.findByName(name);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

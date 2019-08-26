@@ -5,22 +5,22 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lpdev.salesmanagement.entities.BillDetails;
-import com.lpdev.salesmanagement.entities.BillDetailsId;
-import com.lpdev.salesmanagement.repositories.BillDetailsRepository;
+import com.lpdev.salesmanagement.entities.BillDetail;
+import com.lpdev.salesmanagement.entities.BillDetailId;
+import com.lpdev.salesmanagement.repositories.BillDetailRepository;
 
 @Service
-public class BillDetailsService {
+public class BillDetailService {
 
-	private static final Log log = LogFactory.getLog(BillDetailsService.class);
+	private static final Log log = LogFactory.getLog(BillDetailService.class);
 
 	@Autowired
-	private BillDetailsRepository billDetailsRepository;
+	private BillDetailRepository billDetailRepository;
 
-	public void persist(BillDetails transientInstance) {
+	public void persist(BillDetail transientInstance) {
 		log.debug("persisting BillDetails instance");
 		try {
-			billDetailsRepository.save(transientInstance);
+			billDetailRepository.save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -28,10 +28,10 @@ public class BillDetailsService {
 		}
 	}
 
-	public void remove(BillDetails persistentInstance) {
+	public void remove(BillDetail persistentInstance) {
 		log.debug("removing BillDetails instance");
 		try {
-			billDetailsRepository.delete(persistentInstance);
+			billDetailRepository.delete(persistentInstance);
 			log.debug("remove successful");
 		} catch (RuntimeException re) {
 			log.error("remove failed", re);
@@ -39,10 +39,10 @@ public class BillDetailsService {
 		}
 	}
 
-	public BillDetails merge(BillDetails detachedInstance) {
+	public BillDetail merge(BillDetail detachedInstance) {
 		log.debug("merging BillDetails instance");
 		try {
-			BillDetails result = billDetailsRepository.saveAndFlush(detachedInstance);
+			BillDetail result = billDetailRepository.saveAndFlush(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -51,10 +51,10 @@ public class BillDetailsService {
 		}
 	}
 
-	public BillDetails findById(BillDetailsId id) {
+	public BillDetail findById(BillDetailId id) {
 		log.debug("getting BillDetails instance with id: " + id);
 		try {
-			BillDetails instance = billDetailsRepository.getOne(id);
+			BillDetail instance = billDetailRepository.getOne(id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
