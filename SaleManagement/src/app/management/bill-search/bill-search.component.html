@@ -1,13 +1,5 @@
-<p-dataView
-  #dv
-  [value]="billSearchs"
-  [paginator]="true"
-  [rows]="20"
-  paginatorPosition="both"
-  filterBy="billId"
-  [sortField]="sortField"
-  [sortOrder]="sortOrder"
->
+<p-dataView #dv [value]="billSearchs" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="billId"
+  [sortField]="sortField" [sortOrder]="sortOrder">
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-g">
@@ -18,25 +10,13 @@
         <div class="ui-g-12 ui-md-6 ui-lg-4">
           <!-- <input type="search" pInputText placeholder="Search by mã hóa đơn"
                             (keyup)="dv.filter($event.target.value)"> -->
-          <p-calendar
-            [(ngModel)]="startDate"
-            [showIcon]="true"
-            placeholder="Từ ngày"
-          ></p-calendar>
+          <p-calendar [(ngModel)]="startDate" [showIcon]="true" placeholder="Từ ngày"></p-calendar>
         </div>
         <div class="ui-g-12 ui-md-6 ui-lg-4">
-          <p-calendar
-            [(ngModel)]="endDate"
-            [showIcon]="true"
-            placeholder="Đến ngày"
-          ></p-calendar>
+          <p-calendar [(ngModel)]="endDate" [showIcon]="true" placeholder="Đến ngày"></p-calendar>
         </div>
         <div class="ui-g-12 ui-md-6 ui-lg-3" style="text-align:center">
-          <p-button
-            label="Tìm kiếm hóa đơn"
-            (onClick)="searchBill($event)"
-            icon="pi pi-search"
-          >
+          <p-button label="Tìm kiếm hóa đơn" (onClick)="searchBill($event)" icon="pi pi-search">
           </p-button>
         </div>
         <div class="ui-g-12 ui-md-6 ui-lg-1" style="text-align:center">
@@ -69,12 +49,7 @@
         </div>
       </div>
       <div class="ui-g-12 ui-md-1 search-icon">
-        <button
-          pButton
-          type="button"
-          icon="pi pi-search"
-          (click)="selectBill($event, billSearch)"
-        ></button>
+        <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)"></button>
       </div>
     </div>
   </ng-template>
@@ -86,33 +61,16 @@
           {{ billSearch.amount }} - {{ billSearch.createDate }}
         </div>
         <hr class="ui-widget-content" style="border-top:0" />
-        <button
-          pButton
-          type="button"
-          icon="pi pi-search"
-          (click)="selectBill($event, billSearch)"
-          style="margin-top:0"
-        ></button>
+        <button pButton type="button" icon="pi pi-search" (click)="selectBill($event, billSearch)"
+          style="margin-top:0"></button>
       </p-panel>
     </div>
   </ng-template>
 </p-dataView>
 
-<p-dialog
-  header="Bill Details"
-  [(visible)]="displayDialog"
-  [responsive]="true"
-  showEffect="fade"
-  [modal]="true"
-  (onAfterHide)="onDialogHide()"
->
-  <p-table
-    [columns]="cols"
-    [value]="selectedBills"
-    selectionMode="single"
-    [paginator]="true"
-    rows="10"
-  >
+<p-dialog header="Bill Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  (onAfterHide)="onDialogHide()">
+  <p-table [columns]="cols" [value]="selectedBills" selectionMode="single" [paginator]="true" rows="10">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns">

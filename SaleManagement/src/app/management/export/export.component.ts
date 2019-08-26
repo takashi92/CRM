@@ -14,11 +14,14 @@ export class ExportComponent implements OnInit {
   displayDialog: boolean;
   products: Product[];
   cols: any[];
-  filteredBrand: any[] =[];
-  filteredName: any[]=[];
-  filteredMaterial: any[]=[];
-  filteredColor: any[]=[];
-  filteredSize: any[]=[];
+
+  filter: Product = new ProductSample();
+  filteredBrand: any[] = [];
+  filteredName: any[] = [];
+  filteredMaterial: any[] = [];
+  filteredColor: any[] = [];
+  filteredSize: any[] = [];
+  filteredProducts: Product[];
 
   constructor(private exportProductService: ExportProductService) {
   }
@@ -37,10 +40,12 @@ export class ExportComponent implements OnInit {
     ];
   }
   filterBrand(event) {
+    this.filteredBrand = ['Audi', 'BMW', 'Fiat', 'Ford', 'Honda', 'Jaguar', 'Mercedes', 'Renault', 'Volvo', 'VW'];
   }
 
   filterName(event) {
   }
+
 
   filterMaterial(event) {
   }
@@ -52,12 +57,12 @@ export class ExportComponent implements OnInit {
   }
 
 
-  handleDropdown(event) {
-    //event.query = current value in input field
-    console.log("aa");
+  searchProduct() {
+    this.exportProductService.getFilteredProduct(this.filter.brand, this.filter.name, this.filter.color, this.filter.size).then(products => this.filteredProducts = products);
   }
 
   selectProduct(selectedProduct: Product) {
+
   }
 
 }

@@ -9,7 +9,7 @@ export class ExportProductService {
 
   constructor(private http: HttpClient) { }
 
-  getFilteredProduct(filteredBrand, filteredName, filteredMaterial, filteredColor, filteredSize) {
+  getFilteredProduct(filteredBrand, filteredName, filteredColor, filteredSize) {
     return this.http.get<any>('assets/data/warehouse-sample.json')
       .toPromise()
       .then(res => <Product[]>res.data)

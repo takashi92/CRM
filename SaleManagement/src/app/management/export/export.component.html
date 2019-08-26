@@ -2,27 +2,42 @@
     <h3>Tìm kiếm sản phẩm</h3>
     <div class="ui-helper-clearfix">
         <div class="ui-g ui-fluid">
-            <div class="ui-g-6 ui-md-3">
-                <p-autoComplete [(ngModel)]="product.brand" [suggestions]="filteredBrand"
-                    (completeMethod)="filterBrand($event)" [dropdown]="true" placeholder="Nhãn hàng"></p-autoComplete>
+            <div class="ui-g-12 ui-md-5">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-6">
+                        <p-autoComplete [(ngModel)]="filter.brand" [suggestions]="filteredBrand"
+                            (completeMethod)="filterBrand($event)" [dropdown]="true" placeholder="Nhãn hàng">
+                        </p-autoComplete>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p-autoComplete [(ngModel)]="filter.name" [suggestions]="filteredName"
+                            (completeMethod)="filterName($event)" [dropdown]="true" placeholder="Tên sản phẩm">
+                        </p-autoComplete>
+                    </div>
+                </div>
             </div>
-            <div class="ui-g-6 ui-md-3">
-                <p-autoComplete [(ngModel)]="product.name" [suggestions]="filteredName"
-                    (completeMethod)="filterName($event)" [dropdown]="true" placeholder="Tên sản phẩm"></p-autoComplete>
+            <div class="ui-g-12 ui-md-5">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-6">
+                        <p-autoComplete [(ngModel)]="filter.color" [suggestions]="filteredColor"
+                            (completeMethod)="filterColor($event)" [dropdown]="true" placeholder="Màu"></p-autoComplete>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p-autoComplete [(ngModel)]="filter.size" [suggestions]="filteredSize"
+                            (completeMethod)="filterSize($event)" [dropdown]="true" placeholder="Kích cỡ">
+                        </p-autoComplete>
+                    </div>
+                </div>
             </div>
-            <div class="ui-g-6 ui-md-3">
-                <p-autoComplete [(ngModel)]="product.color" [suggestions]="filteredColor"
-                    (completeMethod)="filterColor($event)" [dropdown]="true" placeholder="Màu"></p-autoComplete>
-            </div>
-            <div class="ui-g-6 ui-md-3">
-                <p-autoComplete [(ngModel)]="product.size" [suggestions]="filteredSize"
-                    (completeMethod)="filterSize($event)" [dropdown]="true" placeholder="Kích cỡ"></p-autoComplete>
+            <div class="ui-g-12 ui-md-2" style="text-align: center">
+                <p-button label="Tìm kiếm sản phẩm" (onClick)="searchProduct($event)" icon="pi pi-search">
+                </p-button>
             </div>
         </div>
     </div>
 </p-header>
-<div *ngIf="products">
-    <p-carousel headerText="Kết quả tìm kiếm" [value]="products">
+<div *ngIf="filteredProducts">
+    <p-carousel headerText="Kết quả tìm kiếm" [value]="filteredProducts">
         <ng-template let-product pTemplate="item">
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
@@ -30,37 +45,27 @@
                     </div>
                 </div>
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Nhãn hàng</div>
-                    <div class="ui-grid-col-6">{{product.brand}}</div>
+                    <div class="ui-grid-col-3"><label>Nhãn hàng</label></div>
+                    <div class="ui-grid-col-3">{{product.brand}}</div>
+                    <div class="ui-grid-col-3"><label>Tên sản phẩm</label></div>
+                    <div class="ui-grid-col-3">{{product.name}}</div>
+                </div>
+                <!-- <div class="ui-grid-row">
+                    <div class="ui-grid-col-3"><label>Màu</label></div>
+                    <div class="ui-grid-col-3">{{product.color}}</div>
+                    <div class="ui-grid-col-3"><label>Kích cỡ</label></div>
+                    <div class="ui-grid-col-3">{{product.size}}</div>
                 </div>
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Tên sản phẩm</div>
-                    <div class="ui-grid-col-6">{{product.name}}</div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Màu</div>
-                    <div class="ui-grid-col-6">{{product.color}}</div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Kích cỡ</div>
-                    <div class="ui-grid-col-6">{{product.size}}</div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Chất liệu</div>
-                    <div class="ui-grid-col-6">{{product.material}}</div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Số lượng</div>
-                    <div class="ui-grid-col-6">{{product.number}}</div>
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">Giá niêm yết</div>
-                    <div class="ui-grid-col-6">{{product.stickerPrice}}</div>
-                </div>
+                    <div class="ui-grid-col-3">Số lượng</div>
+                    <div class="ui-grid-col-3">{{product.number}}</div>
+                    <div class="ui-grid-col-3">Giá niêm yết</div>
+                    <div class="ui-grid-col-3">{{product.stickerPrice}}</div>
+                </div> -->
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-12">
-                        <button type="button" pButton icon="pi pi-shopping-cart"
-                            (click)="selectProduct(product)"></button>
+                        <p-button label="Tìm kiếm sản phẩm" icon="pi pi-shopping-cart"
+                            (click)="selectProduct(product)"></p-button>
                     </div>
                 </div>
             </div>
@@ -68,7 +73,7 @@
     </p-carousel>
 </div>
 
-<!-- <p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
+<p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
     (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
     <ng-template pTemplate="header" let-columns>
         <tr>
@@ -85,20 +90,15 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="summary" let-rowData>
-
         <div class="ui-g ui-fluid">
-            <div class="ui-g-12 ui-md-4">
-                <button pButton type="button" label="Thêm sản phẩm" icon="pi pi-plus" class="ui-button-info"
-                    (click)="showDialogToAdd()"></button>
-            </div>
-            <div class="ui-g-12 ui-md-4">
+            <div class="ui-g-12 ui-md-6">
                 <button pButton type="button" label="Lưu hóa đơn" icon="pi pi-save" class="ui-button-warning"
                     (click)="pushImportedProduct()"></button>
             </div>
-            <div class="ui-g-12 ui-md-4">
+            <div class="ui-g-12 ui-md-6">
                 <button pButton type="button" label="Hủy hóa đơn" icon="pi pi-times" class="ui-button-danger"
                     (click)="emptyImportedProduct()"></button>
             </div>
         </div>
     </ng-template>
-</p-table> -->
+</p-table>

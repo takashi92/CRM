@@ -105,6 +105,7 @@ export class ImportComponent implements OnInit {
 
   handleDropdown(event) {
     //event.query = current value in input field
+    console.log("aaaaaaaaaaa");
   }
 
 
