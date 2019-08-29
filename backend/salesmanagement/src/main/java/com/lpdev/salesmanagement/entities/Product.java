@@ -23,8 +23,6 @@ public class Product implements java.io.Serializable {
 	private Brand brand;
 	private Category category;
 	private String name;
-	private String code;
-	private String barCode;
 	private String note;
 	private Long created;
 	private Long updated;
@@ -37,14 +35,12 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(Brand brand, Category category, String name, String code, String barCode, String note, Long created,
-			Long updated, Set<ProductDetail> productDetails, Set<Image> images, Storage storage, Set<Supply> supplies,
+	public Product(Brand brand, Category category, String name, String note, Long created, Long updated,
+			Set<ProductDetail> productDetails, Set<Image> images, Storage storage, Set<Supply> supplies,
 			Set<BillDetail> billDetails) {
 		this.brand = brand;
 		this.category = category;
 		this.name = name;
-		this.code = code;
-		this.barCode = barCode;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
@@ -94,24 +90,6 @@ public class Product implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Column(name = "code")
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Column(name = "bar_code")
-	public String getBarCode() {
-		return this.barCode;
-	}
-
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
 	}
 
 	@Column(name = "note")

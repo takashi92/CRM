@@ -8,8 +8,6 @@ public class ProductParam {
 	private int id;
 	private String brandName;
 	private String name;
-	private String code;
-	private String barCode;
 	private Map<String, String> properties = new HashMap<String, String>();
 	private String note;
 	private Long created;
@@ -37,22 +35,6 @@ public class ProductParam {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getBarCode() {
-		return barCode;
-	}
-
-	public void setBarCode(String barCode) {
-		this.barCode = barCode;
 	}
 
 	public Map<String, String> getProperties() {

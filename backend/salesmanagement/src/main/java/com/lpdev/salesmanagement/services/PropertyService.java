@@ -64,16 +64,4 @@ public class PropertyService {
 			throw re;
 		}
 	}
-
-	public Property findByName(String name) {
-		log.debug("getting Property instance with name: " + name);
-		try {
-			Property instance = propertyRepository.findByName(name);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
-	}
 }
