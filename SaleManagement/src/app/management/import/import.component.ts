@@ -103,12 +103,6 @@ export class ImportComponent implements OnInit {
     this.filteredStickerPrice = this.importProductService.getFilteredStickerPrice(event.query);
   }
 
-  handleDropdown(event) {
-    //event.query = current value in input field
-    console.log("aaaaaaaaaaa");
-  }
-
-
   pushImportedProduct() {
 
   }

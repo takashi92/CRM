@@ -5,13 +5,11 @@
             <div class="ui-g-12 ui-md-5">
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12 ui-md-6">
-                        <p-autoComplete [(ngModel)]="filter.brand" [suggestions]="filteredBrand"
-                            (completeMethod)="filterBrand($event)" [dropdown]="true" placeholder="Nhãn hàng">
+                        <p-autoComplete [(ngModel)]="filter.brand" [suggestions]="filteredBrand" (completeMethod)="filterBrand($event)" [dropdown]="true" placeholder="Nhãn hàng">
                         </p-autoComplete>
                     </div>
                     <div class="ui-g-12 ui-md-6">
-                        <p-autoComplete [(ngModel)]="filter.name" [suggestions]="filteredName"
-                            (completeMethod)="filterName($event)" [dropdown]="true" placeholder="Tên sản phẩm">
+                        <p-autoComplete [(ngModel)]="filter.name" [suggestions]="filteredName" (completeMethod)="filterName($event)" [dropdown]="true" placeholder="Tên sản phẩm">
                         </p-autoComplete>
                     </div>
                 </div>
@@ -19,12 +17,10 @@
             <div class="ui-g-12 ui-md-5">
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12 ui-md-6">
-                        <p-autoComplete [(ngModel)]="filter.color" [suggestions]="filteredColor"
-                            (completeMethod)="filterColor($event)" [dropdown]="true" placeholder="Màu"></p-autoComplete>
+                        <p-autoComplete [(ngModel)]="filter.color" [suggestions]="filteredColor" (completeMethod)="filterColor($event)" [dropdown]="true" placeholder="Màu"></p-autoComplete>
                     </div>
                     <div class="ui-g-12 ui-md-6">
-                        <p-autoComplete [(ngModel)]="filter.size" [suggestions]="filteredSize"
-                            (completeMethod)="filterSize($event)" [dropdown]="true" placeholder="Kích cỡ">
+                        <p-autoComplete [(ngModel)]="filter.size" [suggestions]="filteredSize" (completeMethod)="filterSize($event)" [dropdown]="true" placeholder="Kích cỡ">
                         </p-autoComplete>
                     </div>
                 </div>
@@ -36,36 +32,37 @@
         </div>
     </div>
 </p-header>
+
 <div *ngIf="filteredProducts">
     <p-carousel headerText="Kết quả tìm kiếm" [value]="filteredProducts">
-        <ng-template let-product pTemplate="item">
+        <ng-template let-filteredProduct pTemplate="item">
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-12"><img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">
-                    </div>
+                    <!-- <div class="ui-grid-col-12"><img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60">
+                    </div> -->
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3"><label>Nhãn hàng</label></div>
-                    <div class="ui-grid-col-3">{{product.brand}}</div>
+                    <div class="ui-grid-col-3">{{filteredProduct.brand}}</div>
                     <div class="ui-grid-col-3"><label>Tên sản phẩm</label></div>
-                    <div class="ui-grid-col-3">{{product.name}}</div>
+                    <div class="ui-grid-col-3">{{filteredProduct.name}}</div>
                 </div>
-                <!-- <div class="ui-grid-row">
+                <div class="ui-grid-row">
                     <div class="ui-grid-col-3"><label>Màu</label></div>
-                    <div class="ui-grid-col-3">{{product.color}}</div>
+                    <div class="ui-grid-col-3">{{filteredProduct.color}}</div>
                     <div class="ui-grid-col-3"><label>Kích cỡ</label></div>
-                    <div class="ui-grid-col-3">{{product.size}}</div>
+                    <div class="ui-grid-col-3">{{filteredProduct.size}}</div>
                 </div>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-3">Số lượng</div>
-                    <div class="ui-grid-col-3">{{product.number}}</div>
+                    <div class="ui-grid-col-3">{{filteredProduct.number}}</div>
                     <div class="ui-grid-col-3">Giá niêm yết</div>
-                    <div class="ui-grid-col-3">{{product.stickerPrice}}</div>
-                </div> -->
+                    <div class="ui-grid-col-3">{{filteredProduct.stickerPrice}}</div>
+                </div>
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-12">
-                        <p-button label="Tìm kiếm sản phẩm" icon="pi pi-shopping-cart"
-                            (click)="selectProduct(product)"></p-button>
+                    <div class="ui-grid-col-12" style="text-align: center; padding-top: 20px; padding-bottom: 5px">
+                        <p-button label="Chọn bán sản phẩm" icon="pi pi-shopping-cart" (click)="selectProduct(filteredProduct)">
+                        </p-button>
                     </div>
                 </div>
             </div>
@@ -73,8 +70,124 @@
     </p-carousel>
 </div>
 
-<p-table [columns]="cols" [value]="products" selectionMode="single" [(selection)]="selectedProduct"
-    (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
+<p-dialog header="Chi tiết hóa đơn" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true" [width]="1000">
+    <div *ngIf="billDetail">
+        <p-fieldset legend="Chi tiết thông tin sản phẩm" [toggleable]="true">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="brand">Nhãn hàng</label></div>
+                <div class="ui-g-6 ui-md-4">
+                    {{billDetail.selectedProduct.brand}}
+                </div>
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="name">Tên sản phẩm</label></div>
+                <div class="ui-g-6 ui-md-4">
+                    {{billDetail.selectedProduct.name}}
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mã sản phẩm</label></div>
+                <div class="ui-g-6 ui-md-4">{{billDetail.selectedProduct.code}}</div>
+
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Chất liệu</label></div>
+                <div class="ui-g-6 ui-md-4">
+                    {{billDetail.selectedProduct.material}}
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mô tả sản phẩm</label></div>
+                <div class="ui-g-6 ui-md-4">{{billDetail.selectedProduct.description}}</div>
+
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="color">Màu</label></div>
+                <div class="ui-g-6 ui-md-4">{{billDetail.selectedProduct.color}}</div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Kích cỡ</label></div>
+                <div class="ui-g-6 ui-md-4">
+                    {{billDetail.selectedProduct.size}}
+                </div>
+                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Giá niêm yết</label></div>
+                <div class="ui-g-6 ui-md-4">
+                    {{billDetail.selectedProduct.stickerPrice}}
+                </div>
+            </div>
+        </p-fieldset>
+        <p-fieldset legend="Chi tiết hóa đơn">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Số lượng</label></div>
+                <div class="ui-g-12 ui-md-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-plus"></i></span>
+                        <input type="text" pInputText placeholder="Số lượng" id="number" [(ngModel)]="billDetail.sellNumber">
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Giá niêm yết</label></div>
+                <div class="ui-g-12 ui-md-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-dollar"></i></span>
+                        <input type="text" pInputText placeholder="Giá niêm yết" id="stickerPrice" [(ngModel)]="billDetail.selectedProduct.stickerPrice">
+                        <span class="ui-inputgroup-addon">vnđ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Khuyến mại</label></div>
+                <div class="ui-g-12 ui-md-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" pInputText placeholder="Khuyến mại" id="discount" [(ngModel)]="billDetail.discount">
+                        <span class="ui-inputgroup-addon">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Thành tiền</label></div>
+                <div class="ui-g-12 ui-md-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
+                        <span class="ui-inputgroup-addon" id="amountPrice" [(ngModel)]="billDetail.amountPrice">{{(billDetail.selectedProduct.stickerPrice - (billDetail.selectedProduct.stickerPrice / 100 * 10)) * billDetail.sellNumber}}</span>
+                        <span class="ui-inputgroup-addon">vnđ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Ghi chú</label></div>
+                <div class="ui-g-12 ui-md-8"><textarea pInputTextarea [(ngModel)]="billDetail.note"></textarea></div>
+            </div>
+
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"><label for="size">Hình thức thanh toán</label>
+                </div>
+                <div class="ui-g-12 ui-md-8">
+                    <div>
+                        <p-radioButton name="group2" value="cod" label="Thanh toán tiền mặt khi nhận hàng" [(ngModel)]="billDetail.payment" inputId="preopt1">
+                        </p-radioButton>
+                    </div>
+                    <div>
+                        <p-radioButton name="group2" value="bank" label="Thanh toán qua ngân hàng" [(ngModel)]="billDetail.payment" inputId="preopt2">
+                        </p-radioButton>
+                    </div>
+                    <div>
+                        <p-radioButton name="group2" value="wallet" label="Thanh toán bằng ví điện tử" [(ngModel)]="billDetail.payment" inputId="preopt3">
+                        </p-radioButton>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-2 ui-md-2" style="text-align:right"></div>
+                <div class="ui-g-12 ui-md-8"><textarea pInputTextarea [(ngModel)]="billDetail.paymentNote" placeholder="Thông tin ngân hàng, ví điện tử, phí ship hàng ..."></textarea></div>
+            </div>
+        </p-fieldset>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button style="text-align:center" type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+            <button style="text-align:center" type="button" pButton icon="pi pi-times" (click)="delete()" label="Clear"></button>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-table [columns]="cols" [value]="billDetails" selectionMode="single" [(selection)]="selectedBillDetail" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -92,12 +205,10 @@
     <ng-template pTemplate="summary" let-rowData>
         <div class="ui-g ui-fluid">
             <div class="ui-g-12 ui-md-6">
-                <button pButton type="button" label="Lưu hóa đơn" icon="pi pi-save" class="ui-button-warning"
-                    (click)="pushImportedProduct()"></button>
+                <button pButton type="button" label="Lưu hóa đơn" icon="pi pi-save" class="ui-button-warning" (click)="saveBillDetails()"></button>
             </div>
             <div class="ui-g-12 ui-md-6">
-                <button pButton type="button" label="Hủy hóa đơn" icon="pi pi-times" class="ui-button-danger"
-                    (click)="emptyImportedProduct()"></button>
+                <button pButton type="button" label="Hủy hóa đơn" icon="pi pi-times" class="ui-button-danger" (click)="emptyBillDetails()"></button>
             </div>
         </div>
     </ng-template>

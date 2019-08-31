@@ -37,15 +37,19 @@ export class BillSearchComponent implements OnInit {
     ];
 
     this.cols = [
-      { field: 'brand', header: 'Nhãn hàng' },
+      { field: 'brand', header: 'Thương hiệu' },
       { field: 'name', header: 'Tên sản phẩm' },
+      { field: 'code', header: 'Mã sản phẩm' },
       { field: 'color', header: 'Màu sắc' },
-      { field: 'size', header: 'Size' },
-      { field: 'price', header: 'Đơn giá' },
-      { field: 'number', header: 'Số lượng' },
-      { field: 'discount', header: 'Giảm giá' },
-      { field: 'created', header: 'Ngày bán' },
-      { field: 'amount', header: 'Thành tiền' }
+      { field: 'size', header: 'Kích thước' },
+      { field: 'material', header: 'Chất liệu' },
+      { field: 'stickerPrice', header: 'Giá niêm yết' },
+      { field: 'sellNumber', header: 'Số lượng bán' },
+      { field: 'discount', header: 'Khuyến mại' },
+      { field: 'amountPrice', header: 'Thành tiền' },
+      { field: 'note', header: 'Ghi chú' },
+      { field: 'payment', header: 'Hình thức thanh toán' },
+      { field: 'paymentNote', header: 'Thông tin thanh toán' },
     ];
   }
 

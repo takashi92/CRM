@@ -33,6 +33,9 @@ import { PanelModule } from 'primeng/panel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CarouselModule } from 'primeng/carousel';
+import { FieldsetModule } from 'primeng/fieldset';
+import { RadioButtonModule } from 'primeng/radiobutton';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +71,8 @@ import { CarouselModule } from 'primeng/carousel';
     InputTextareaModule,
     AutoCompleteModule,
     CarouselModule,
+    FieldsetModule,
+    RadioButtonModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },

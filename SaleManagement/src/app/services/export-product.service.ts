@@ -10,9 +10,29 @@ export class ExportProductService {
   constructor(private http: HttpClient) { }
 
   getFilteredProduct(filteredBrand, filteredName, filteredColor, filteredSize) {
-    return this.http.get<any>('assets/data/warehouse-sample.json')
-      .toPromise()
-      .then(res => <Product[]>res.data)
-      .then(data => data);
+    return [
+      {
+        brand: 'aaa',
+        name: 'aaa',
+        color: 'aaa',
+        size: 'aaa',
+        number: 'aaa',
+        stickerPrice: 'aaa'
+      }, {
+        brand: 'aaa',
+        name: 'aaa',
+        color: 'aaa',
+        size: 'aaa',
+        number: 'aaa',
+        stickerPrice: 'aaa'
+      }, {
+        brand: 'aaa',
+        name: 'aaa',
+        color: 'aaa',
+        size: 'aaa',
+        number: 'aaa',
+        stickerPrice: 'aaa'
+      }
+    ];
   }
 }
