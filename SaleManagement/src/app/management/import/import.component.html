@@ -39,44 +39,41 @@
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="brand">Nhãn hàng</label></div>
             <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.brand" [suggestions]="filteredBrand"
-                    (completeMethod)="filterBrand($event)" [dropdown]="true"></p-autoComplete>
+                <p-dropdown [options]="filteredBrands" [(ngModel)]="product.brandName" [filter]="true"
+                    filterBy="label,value"></p-dropdown>
             </div>
 
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="name">Tên sản phẩm</label></div>
-            <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.name" [suggestions]="filteredName"
-                    (completeMethod)="filterName($event)" [dropdown]="true"></p-autoComplete>
-            </div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="name" [(ngModel)]="product.name" /></div>
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mã sản phẩm</label></div>
-            <div class="ui-g-6 ui-md-4"><input pInputText id="code" [(ngModel)]="product.code" /></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="code" [(ngModel)]="product.properties.code" /></div>
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Chất liệu</label></div>
             <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.material" [suggestions]="filteredMaterial"
-                    (completeMethod)="filterMaterial($event)" [dropdown]="true"></p-autoComplete>
+                <p-dropdown [options]="filteredMaterials" [(ngModel)]="product.properties.material" [filter]="true"
+                    filterBy="label,value"></p-dropdown>
             </div>
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mô tả sản phẩm</label></div>
-            <div class="ui-g-6 ui-md-4"><input pInputText id="description" [(ngModel)]="product.description" /></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="description" [(ngModel)]="product.properties.description" /></div>
 
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="color">Màu</label></div>
             <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.color" [suggestions]="filteredColor"
-                    (completeMethod)="filterColor($event)" [dropdown]="true"></p-autoComplete>
+                <p-dropdown [options]="filteredColors" [(ngModel)]="product.properties.color" [filter]="true"
+                    filterBy="label,value"></p-dropdown>
             </div>
 
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Kích cỡ</label></div>
             <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.size" [suggestions]="filteredSize"
-                    (completeMethod)="filterSize($event)" [dropdown]="true"></p-autoComplete>
+                    <p-dropdown [options]="filteredSizes" [(ngModel)]="product.properties.size" [filter]="true"
+                    filterBy="label,value"></p-dropdown>
             </div>
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Số lượng</label></div>
@@ -84,10 +81,7 @@
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Giá niêm yết</label></div>
-            <div class="ui-g-6 ui-md-4">
-                <p-autoComplete [(ngModel)]="product.stickerPrice" [suggestions]="filteredStickerPrice"
-                    (completeMethod)="filterStickerPrice($event)" [dropdown]="true"></p-autoComplete>
-            </div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="number" [(ngModel)]="product.stickerPrice" /></div>
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Giá nhập</label></div>
             <div class="ui-g-6 ui-md-4"><input pInputText id="importedPrice" [(ngModel)]="product.importedPrice" />
@@ -100,7 +94,8 @@
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Tổng tiền nhập</label></div>
             <div class="ui-g-6 ui-md-4">
                 <div class="ui-inputgroup">
-                    <span class="ui-inputgroup-addon" id="importAmount"[(ngModel)]="product.importAmount">{{product.importedPrice * product.number}}</span>
+                    <span class="ui-inputgroup-addon" id="importAmount"
+                        [(ngModel)]="product.importAmount">{{product.importedPrice * product.number}}</span>
                     <span class="ui-inputgroup-addon">.vnđ</span>
                 </div>
             </div>

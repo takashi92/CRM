@@ -9,9 +9,9 @@ export class WarehouseService {
   constructor(private http: HttpClient) { }
 
   getProductData() {
-    return this.http.get<any>('assets/data/warehouse-sample.json')
+    return this.http.get<any>('api/salesmanagement/product')
       .toPromise()
-      .then(res => <Product[]>res.data)
-      .then(data => data);
+      .then(res => <Product[]>res.data);
   }
+
 }

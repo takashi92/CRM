@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductSample } from 'src/app/domain/product';
+import { Product } from 'src/app/domain/product';
 
 import { ExportProductService } from 'src/app/services/export-product.service';
 import { BillDetail, BillDetailSample } from 'src/app/domain/billdetail';
@@ -9,7 +9,7 @@ import { BillDetail, BillDetailSample } from 'src/app/domain/billdetail';
   styleUrls: ['./export.component.scss']
 })
 export class ExportComponent implements OnInit {
-  filter: Product = new ProductSample();
+  filter: Product = new Product();
   filteredBrand: any[] = [];
   filteredName: any[] = [];
   filteredMaterial: any[] = [];
@@ -30,16 +30,16 @@ export class ExportComponent implements OnInit {
 
 
   ngOnInit() {
-    this.filteredProducts = this.exportProductService.getFilteredProduct(this.filter.brand, this.filter.name, this.filter.color, this.filter.size);
+    this.searchProduct();
     this.billDetails = [];
     this.cols = [
-      { field: 'brand', header: 'Thương hiệu' },
-      { field: 'name', header: 'Tên sản phẩm' },
-      { field: 'code', header: 'Mã sản phẩm' },
-      { field: 'color', header: 'Màu sắc' },
-      { field: 'size', header: 'Kích thước' },
-      { field: 'material', header: 'Chất liệu' },
-      { field: 'stickerPrice', header: 'Giá niêm yết' },
+      { field: 'selectedProduct.brandName', header: 'Thương hiệu' },
+      { field: 'selectedProduct.name', header: 'Tên sản phẩm' },
+      { field: 'selectedProduct.properties.code', header: 'Mã sản phẩm' },
+      { field: 'selectedProduct.properties.color', header: 'Màu sắc' },
+      { field: 'selectedProduct.properties.size', header: 'Kích thước' },
+      { field: 'selectedProduct.properties.material', header: 'Chất liệu' },
+      { field: 'selectedProduct.stickerPrice', header: 'Giá niêm yết' },
       { field: 'sellNumber', header: 'Số lượng bán' },
       { field: 'discount', header: 'Khuyến mại' },
       { field: 'amountPrice', header: 'Thành tiền' },
@@ -67,7 +67,9 @@ export class ExportComponent implements OnInit {
 
 
   searchProduct() {
-    this.filteredProducts = this.exportProductService.getFilteredProduct(this.filter.brand, this.filter.name, this.filter.color, this.filter.size);
+    this.exportProductService.getFilteredProduct(this.filter.brandName, this.filter.name
+      , this.filter.properties.color, this.filter.properties.size)
+      .then(res => this.filteredProducts);
   }
 
   selectProduct(selectedProduct: Product) {

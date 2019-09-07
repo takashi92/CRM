@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductSample } from 'src/app/domain/product';
+import { Product, Properties } from 'src/app/domain/product';
 import { ImportProductService } from 'src/app/services/import-product.service';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-import',
@@ -8,32 +9,37 @@ import { ImportProductService } from 'src/app/services/import-product.service';
   styleUrls: ['./import.component.scss']
 })
 export class ImportComponent implements OnInit {
-  product: Product = new ProductSample();
+  product: Product = new Product();
   selectedProduct: Product;
   newProduct: boolean;
   displayDialog: boolean;
   products: Product[];
   cols: any[];
 
-  filteredBrand: any[];
-  filteredName: any[];
-  filteredMaterial: any[];
-  filteredColor: any[];
-  filteredSize: any[];
-  filteredStickerPrice: any[];
+  filteredBrands: SelectItem[];
+  filteredMaterials: SelectItem[];
+  filteredColors: SelectItem[];
+  filteredSizes: SelectItem[];
 
-  constructor(private importProductService: ImportProductService) { }
+  constructor(private importProductService: ImportProductService) {
+    this.product.parser(null, null, null, new Properties(), null, null, null, null, null, null, null);
+    this.filterBrand();
+    this.filterMaterial();
+    this.filterColor();
+    this.filterMaterial();
+    this.filterSize();
+  }
 
   ngOnInit() {
     this.products = [];
     this.cols = [
-      { field: 'brand', header: 'Nhãn hàng' },
+      { field: 'brandName', header: 'Nhãn hàng' },
       { field: 'name', header: 'Tên sản phẩm' },
-      { field: 'code', header: 'Mã sản phẩm' },
-      { field: 'material', header: 'Chất liệu' },
-      { field: 'description', header: 'Mô tả sản phẩm' },
-      { field: 'color', header: 'Màu sắc' },
-      { field: 'size', header: 'Kích cỡ' },
+      { field: 'properties.code', header: 'Mã sản phẩm' },
+      { field: 'properties.material', header: 'Chất liệu' },
+      { field: 'properties.description', header: 'Mô tả sản phẩm' },
+      { field: 'properties.color', header: 'Màu sắc' },
+      { field: 'properties.size', header: 'Kích cỡ' },
       { field: 'number', header: 'Số lượng' },
       { field: 'stickerPrice', header: 'Giá niêm yết trên một sản phẩm' },
       { field: 'importedPrice', header: 'Giá nhập trên một sản phẩm' },
@@ -46,7 +52,8 @@ export class ImportComponent implements OnInit {
 
   showDialogToAdd() {
     this.newProduct = true;
-    this.product = new ProductSample();
+    this.product = new Product();
+    this.product.parser(null, null, null, new Properties(), null, null, null, null, null, null, null);
     this.displayDialog = true;
   }
 
@@ -79,28 +86,21 @@ export class ImportComponent implements OnInit {
     return this.products.indexOf(this.selectedProduct);
   }
 
-  filterBrand(event) {
-    this.filteredBrand = this.importProductService.getFilteredBrand(event.query);
+  filterBrand() {
+    this.filteredBrands = this.importProductService.getFilteredBrand();
   }
 
-  filterName(event) {
-    this.filteredName = this.importProductService.getFilteredName(event.query);
+
+  filterMaterial() {
+    this.filteredMaterials = this.importProductService.getFilteredMaterial();
   }
 
-  filterMaterial(event) {
-    this.filteredMaterial = this.importProductService.getFilteredMaterial(event.query);
+  filterColor() {
+    this.filteredColors = this.importProductService.getFilteredColor();
   }
 
-  filterColor(event) {
-    this.filteredColor = this.importProductService.getFilteredColor(event.query);
-  }
-
-  filterSize(event) {
-    this.filteredSize = this.importProductService.getFilteredSize(event.query);
-  }
-
-  filterStickerPrice(event) {
-    this.filteredStickerPrice = this.importProductService.getFilteredStickerPrice(event.query);
+  filterSize() {
+    this.filteredSizes = this.importProductService.getFilteredSize();
   }
 
   pushImportedProduct() {

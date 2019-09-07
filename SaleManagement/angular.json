@@ -67,11 +67,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "SaleManagement:build"
+            "browserTarget": "SaleManagement:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
               "browserTarget": "SaleManagement:build:production"
+
             }
           }
         },

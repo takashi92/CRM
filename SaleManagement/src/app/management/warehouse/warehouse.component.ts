@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WarehouseService } from 'src/app/services/warehouse.service';
-import { Product, ProductSample } from 'src/app/domain/product';
+import { Product } from 'src/app/domain/product';
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
@@ -10,7 +10,7 @@ import { Product, ProductSample } from 'src/app/domain/product';
 export class WarehouseComponent implements OnInit {
   displayDialog: boolean;
 
-  product: Product = new ProductSample();
+  product: Product = new Product();
 
   selectedProduct: Product;
 
@@ -28,13 +28,13 @@ export class WarehouseComponent implements OnInit {
     this.warehouseService.getProductData().then(products => this.products = products);
 
     this.cols = [
-      { field: 'brand', header: 'Nhãn hàng' },
+      { field: 'brandName', header: 'Nhãn hàng' },
       { field: 'name', header: 'Tên sản phẩm' },
-      { field: 'code', header: 'Mã sản phẩm' },
-      { field: 'material', header: 'Chất liệu' },
-      { field: 'description', header: 'Mô tả sản phẩm' },
-      { field: 'color', header: 'Màu sắc' },
-      { field: 'size', header: 'Kích cỡ' },
+      { field: 'properties.code', header: 'Mã sản phẩm' },
+      { field: 'properties.material', header: 'Chất liệu' },
+      { field: 'properties.description', header: 'Mô tả sản phẩm' },
+      { field: 'properties.color', header: 'Màu sắc' },
+      { field: 'properties.size', header: 'Kích cỡ' },
       { field: 'number', header: 'Số lượng' },
       { field: 'stickerPrice', header: 'Giá niêm yết trên một sản phẩm' },
       { field: 'importedPrice', header: 'Giá nhập trên một sản phẩm' },
