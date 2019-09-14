@@ -22,7 +22,7 @@ export class ImportComponent implements OnInit {
   filteredSizes: SelectItem[];
 
   constructor(private importProductService: ImportProductService) {
-    this.product.parser(null, null, null, new Properties(), null, null, null, null, null, null, null);
+    this.product.parser(null, null, null, new Properties(), null, 0, 0, 0, 0, null, null);
     this.filterBrand();
     this.filterMaterial();
     this.filterColor();
@@ -53,7 +53,7 @@ export class ImportComponent implements OnInit {
   showDialogToAdd() {
     this.newProduct = true;
     this.product = new Product();
-    this.product.parser(null, null, null, new Properties(), null, null, null, null, null, null, null);
+    this.product.parser(null, null, null, new Properties(), null, 0, 0, 0, 0, null, null);
     this.displayDialog = true;
   }
 

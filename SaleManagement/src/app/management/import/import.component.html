@@ -39,8 +39,14 @@
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="brand">Nhãn hàng</label></div>
             <div class="ui-g-6 ui-md-4">
-                <p-dropdown [options]="filteredBrands" [(ngModel)]="product.brandName" [filter]="true"
-                    filterBy="label,value"></p-dropdown>
+                <div class="ui-fluid">
+                    <div class="ui-inputgroup">
+                        <p-dropdown [options]="filteredBrands" [(ngModel)]="product.brandName" [filter]="true"
+                            filterBy="label,value">
+                        </p-dropdown>
+                        <button pButton type="button" icon="fa fa-superpowers" class="ui-button-warn"></button>
+                    </div>
+                </div>
             </div>
 
 
@@ -59,7 +65,8 @@
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="code">Mô tả sản phẩm</label></div>
-            <div class="ui-g-6 ui-md-4"><input pInputText id="description" [(ngModel)]="product.properties.description" /></div>
+            <div class="ui-g-6 ui-md-4"><input pInputText id="description"
+                    [(ngModel)]="product.properties.description" /></div>
 
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="color">Màu</label></div>
@@ -72,7 +79,7 @@
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Kích cỡ</label></div>
             <div class="ui-g-6 ui-md-4">
-                    <p-dropdown [options]="filteredSizes" [(ngModel)]="product.properties.size" [filter]="true"
+                <p-dropdown [options]="filteredSizes" [(ngModel)]="product.properties.size" [filter]="true"
                     filterBy="label,value"></p-dropdown>
             </div>
 
@@ -89,7 +96,8 @@
         </div>
         <div class="ui-g ui-fluid">
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="note">Ghi chú</label></div>
-            <div class="ui-g-6 ui-md-4"> <textarea pInputTextarea id="note" [(ngModel)]="product.note"></textarea></div>
+            <div class="ui-g-6 ui-md-4"> <textarea pInputTextarea id="note" [(ngModel)]="product.note"></textarea>
+            </div>
 
             <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="size">Tổng tiền nhập</label></div>
             <div class="ui-g-6 ui-md-4">

@@ -37,7 +37,7 @@ export class Properties {
 
 export class Product {
     constructor() {
-        // this.properties = new Properties();
+        this.properties = new Properties();
     }
     parser(
         id?: number,

@@ -35,6 +35,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CarouselModule } from 'primeng/carousel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { DropdownandaddbuttonComponent } from './management/import/dropdownandaddbutton/dropdownandaddbutton.component';
+import { UpdatemodeComponent } from './management/import/updatemode/updatemode.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ExportComponent,
     WarehouseComponent,
     BillSearchComponent,
+    DropdownandaddbuttonComponent,
+    UpdatemodeComponent,
   ],
   imports: [
     BrowserModule,
