@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.lpdev.salesmanagement.entities.Property;
 
 @Repository
-public interface PropertyRepository extends JpaRepository<Property, Integer> {
-
-	public Property findByCode(String code);
+public interface PropertyRepository extends JpaRepository<Property, String> {
 	
 }

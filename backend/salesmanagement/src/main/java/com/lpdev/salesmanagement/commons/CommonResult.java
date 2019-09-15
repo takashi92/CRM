@@ -29,4 +29,12 @@ public class CommonResult {
 	public void setData(Object data) {
 		this.data = data;
 	}
+	
+	public static CommonResult getResult(boolean isSuccess, String message, Object data) {
+		CommonResult commonResult = new CommonResult();
+		commonResult.setSuccess(isSuccess);
+		commonResult.setMessage(message);
+		commonResult.setData(data);
+		return commonResult;
+	}
 }

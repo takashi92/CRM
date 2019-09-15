@@ -1,32 +1,28 @@
-package com.lpdev.salesmanagement.models.params;
+package com.lpdev.salesmanagement.params;
 
-import java.util.HashMap;
-import java.util.Map;
+public class PropertyValueParam {
 
-public class ProductParam {
-
-	private int id;
-	private String brandName;
+	private Integer id;
+	private String propertyCode;
 	private String name;
-	private Map<String, String> properties = new HashMap<String, String>();
 	private String note;
 	private Long created;
 	private Long updated;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getBrandName() {
-		return brandName;
+	public String getPropertyCode() {
+		return propertyCode;
 	}
 
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+	public void setPropertyCode(String propertyCode) {
+		this.propertyCode = propertyCode;
 	}
 
 	public String getName() {
@@ -35,14 +31,6 @@ public class ProductParam {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Map<String, String> getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
 	}
 
 	public String getNote() {

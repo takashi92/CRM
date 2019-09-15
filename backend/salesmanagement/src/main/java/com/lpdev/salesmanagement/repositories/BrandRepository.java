@@ -8,6 +8,4 @@ import com.lpdev.salesmanagement.entities.Brand;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
-	public Brand findByName(String name);
-
 }

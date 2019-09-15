@@ -7,23 +7,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lpdev.salesmanagement.commons.CommonResult;
-import com.lpdev.salesmanagement.params.ProductParam;
-import com.lpdev.salesmanagement.services.ProductService;
+import com.lpdev.salesmanagement.params.SupplyParam;
+import com.lpdev.salesmanagement.services.SupplyService;
 
 @RestController
-@RequestMapping(value = "/product")
-public class ProductController {
+@RequestMapping(value = "/suppy")
+public class SupplyController {
 
 	@Autowired
-	ProductService productService;
+	private SupplyService supplyService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public CommonResult save(@RequestBody ProductParam productParam) {
-		return productService.saveOrUpdate(productParam);
-	}
-
-	@RequestMapping(method = RequestMethod.GET)
-	public CommonResult findAll() {
-		return productService.findAll();
+	public CommonResult save(@RequestBody SupplyParam supplyParam) {
+		return supplyService.save(supplyParam);
 	}
 }

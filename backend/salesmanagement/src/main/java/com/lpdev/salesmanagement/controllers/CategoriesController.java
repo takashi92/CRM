@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lpdev.salesmanagement.entities.Category;
-import com.lpdev.salesmanagement.models.params.CategoryParam;
+import com.lpdev.salesmanagement.params.CategoryParam;
 import com.lpdev.salesmanagement.services.CategoryService;
 
 @RestController

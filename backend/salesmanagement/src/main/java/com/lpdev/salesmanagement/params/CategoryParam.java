@@ -1,4 +1,4 @@
-package com.lpdev.salesmanagement.models.params;
+package com.lpdev.salesmanagement.params;
 
 public class CategoryParam {
 
