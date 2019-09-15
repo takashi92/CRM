@@ -74,7 +74,11 @@ export class ImportProductService {
   }
 
   getFilteredProduct(filteredBrand, filteredName, filteredColor, filteredSize) {
-    return this.http.get<any>('http://127.0.0.1:8080/salesmanagement/product')
+    // return this.http.get<any>('http://127.0.0.1:8080/salesmanagement/product')
+    //   .toPromise()
+    //   .then(res => <Product[]>res.data);
+
+    return this.http.get<any>('api/salesmanagement/product')
       .toPromise()
       .then(res => <Product[]>res.data);
   }

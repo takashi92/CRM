@@ -37,7 +37,9 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownandaddbuttonComponent } from './management/import/dropdownandaddbutton/dropdownandaddbutton.component';
 import { UpdatemodeComponent } from './management/import/updatemode/updatemode.component';
-
+import { TabViewModule } from 'primeng/tabview';
+import { InsertmodeComponent } from './management/import/insertmode/insertmode.component';
+import { DataviewComponent } from './management/dataview/dataview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,8 @@ import { UpdatemodeComponent } from './management/import/updatemode/updatemode.c
     BillSearchComponent,
     DropdownandaddbuttonComponent,
     UpdatemodeComponent,
+    InsertmodeComponent,
+    DataviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,7 @@ import { UpdatemodeComponent } from './management/import/updatemode/updatemode.c
     CarouselModule,
     FieldsetModule,
     RadioButtonModule,
+    TabViewModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },
