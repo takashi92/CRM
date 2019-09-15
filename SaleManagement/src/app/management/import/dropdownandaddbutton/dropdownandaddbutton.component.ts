@@ -19,9 +19,9 @@ export class DropdownandaddbuttonComponent implements OnInit {
     name: ''
   };
 
-  constructor(private importService: ImportProductService) {}
+  constructor(private importService: ImportProductService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   selectItem(event) {
     this.onSelectItem.emit(event.value);

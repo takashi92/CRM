@@ -16,18 +16,10 @@ export class InsertmodeComponent implements OnInit {
   products: Product[];
   cols: any[];
 
-  filteredBrands: SelectItem[];
-  filteredMaterials: SelectItem[];
-  filteredColors: SelectItem[];
-  filteredSizes: SelectItem[];
+
 
   constructor(private importProductService: ImportProductService) {
     this.product.parser(null, null, null, new Properties(), null, 0, 0, 0, 0, null, null);
-    this.filterBrand();
-    this.filterMaterial();
-    this.filterColor();
-    this.filterMaterial();
-    this.filterSize();
   }
 
   ngOnInit() {
@@ -86,25 +78,7 @@ export class InsertmodeComponent implements OnInit {
     return this.products.indexOf(this.selectedProduct);
   }
 
-  filterBrand() {
-    this.filteredBrands = this.importProductService.getFilteredBrand();
-  }
-
-
-  filterMaterial() {
-    this.filteredMaterials = this.importProductService.getFilteredMaterial();
-  }
-
-  filterColor() {
-    this.filteredColors = this.importProductService.getFilteredColor();
-  }
-
-  filterSize() {
-    this.filteredSizes = this.importProductService.getFilteredSize();
-  }
-
   pushImportedProduct() {
-
   }
 
   emptyImportedProduct() {

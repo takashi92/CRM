@@ -20,9 +20,27 @@ export class DataviewComponent implements OnInit {
   sortField: string;
 
   sortOrder: number;
+  cols: any[];
   constructor() { }
 
   ngOnInit() {
+    this.cols = [
+      { field: 'brandName', header: 'Nhãn hàng' },
+      { field: 'name', header: 'Tên sản phẩm' },
+      { field: 'properties.code', header: 'Mã sản phẩm' },
+      { field: 'properties.material', header: 'Chất liệu' },
+      { field: 'properties.description', header: 'Mô tả sản phẩm' },
+      { field: 'properties.color', header: 'Màu sắc' },
+      { field: 'properties.size', header: 'Kích cỡ' },
+      { field: 'number', header: 'Số lượng' },
+      { field: 'stickerPrice', header: 'Giá niêm yết trên một sản phẩm' },
+      { field: 'importedPrice', header: 'Giá nhập trên một sản phẩm' },
+      { field: 'importAmount', header: 'Tổng tiền nhập' },
+      { field: 'created', header: 'Ngày nhập' },
+      { field: 'updated', header: 'Ngày cập nhật' },
+      { field: 'note', header: 'Ghi chú' }
+    ];
+
     this.sortOptions = [
       { label: 'Newest First', value: '!year' },
       { label: 'Oldest First', value: 'year' },
@@ -51,6 +69,10 @@ export class DataviewComponent implements OnInit {
 
   onDialogHide() {
     this.selectedProduct = null;
+  }
+
+  getProductViewData(product: Product) {
+    return [product];
   }
 
 }

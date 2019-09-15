@@ -20,32 +20,23 @@
         </div>
     </p-header>
     <ng-template let-product pTemplate="listItem">
-
         <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
             <div class="ui-g-12 ui-md-3" style="text-align:center">
                 <img class="productImage" src="assets/image/logo.png">
             </div>
-            <div class="ui-g-12 ui-md-8 car-details">
-                <div class="ui-g">
-                    <div class="ui-g-2 ui-sm-6"><label>Nhãn hàng</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.brandName}}</b></div>
-
-                    <div class="ui-g-2 ui-sm-6"><label>Tên sản phẩm</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.name}}</b></div>
-
-                    <div class="ui-g-2 ui-sm-6"><label>Màu</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.properties.color}}</b></div>
-
-                    <div class="ui-g-2 ui-sm-6"><label>Kích cỡ</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.properties.size}}</b></div>
-
-                    <div class="ui-g-2 ui-sm-6"><label>Số lượng</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.number}}</b></div>
-
-                    <div class="ui-g-2 ui-sm-6"><label>Giá niêm yết</label></div>
-                    <div class="ui-g-10 ui-sm-6"><b>{{product.stickerPrice}}</b></div>
-
-                </div>
+            <div class="ui-g-12 ui-md-8">
+                <p-table [columns]="cols" [value]="getProductViewData(product)" selectionMode="single">
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" *ngFor="let col of columns">
+                            <td>
+                                {{col.header}}
+                            </td>
+                            <td>
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
             <div class="ui-g-12 ui-md-1 search-icon">
                 <button pButton type="button" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
@@ -66,56 +57,9 @@
 </p-dataView>
 
 
-<p-dialog header="Chi tiết sản phẩm" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-    [closable]="true" [width]="1000">
+<p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true"
+    [width]="1000">
     <div *ngIf="selectedProduct">
-        <p-fieldset legend="Chi tiết thông tin sản phẩm" [toggleable]="true">
-            <div class="ui-g ui-fluid">
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="brandName">Nhãn hàng</label></div>
-                <div class="ui-g-6 ui-md-4">
-                    {{selectedProduct.brandName}}
-                </div>
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="name">Tên sản phẩm</label></div>
-                <div class="ui-g-6 ui-md-4">
-                    {{selectedProduct.name}}
-                </div>
-            </div>
-            <div class="ui-g ui-fluid">
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="properties.code">Mã sản phẩm</label>
-                </div>
-                <div class="ui-g-6 ui-md-4">{{selectedProduct.properties.code}}</div>
-
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="properties.material">Chất liệu</label>
-                </div>
-                <div class="ui-g-6 ui-md-4">
-                    {{selectedProduct.properties.material}}
-                </div>
-            </div>
-            <div class="ui-g ui-fluid">
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="properties.description">Mô tả sản
-                        phẩm</label></div>
-                <div class="ui-g-6 ui-md-4">{{selectedProduct.properties.description}}</div>
-
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="properties.color">Màu</label></div>
-                <div class="ui-g-6 ui-md-4">{{selectedProduct.properties.color}}</div>
-            </div>
-            <div class="ui-g ui-fluid">
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="properties.size">Kích cỡ</label></div>
-                <div class="ui-g-6 ui-md-4">
-                    {{selectedProduct.properties.size}}
-                </div>
-                <div class="ui-g-6 ui-md-2" style="text-align:right"><label for="stickerPrice">Giá niêm yết</label>
-                </div>
-                <div class="ui-g-6 ui-md-4">
-                    {{selectedProduct.stickerPrice}}
-                </div>
-            </div>
-        </p-fieldset>
+        <app-insert-or-update-form [product]="selectedProduct"></app-insert-or-update-form>
     </div>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button style="text-align:center" type="button" pButton icon="pi pi-check" (click)="save()"
-                label="Save"></button>
-        </div>
-    </p-footer>
 </p-dialog>

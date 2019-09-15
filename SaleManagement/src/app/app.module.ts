@@ -40,6 +40,8 @@ import { UpdatemodeComponent } from './management/import/updatemode/updatemode.c
 import { TabViewModule } from 'primeng/tabview';
 import { InsertmodeComponent } from './management/import/insertmode/insertmode.component';
 import { DataviewComponent } from './management/dataview/dataview.component';
+import { InsertOrUpdateFormComponent } from './management/insert-or-update-form/insert-or-update-form.component';
+import { SpinnerModule } from 'primeng/spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,7 @@ import { DataviewComponent } from './management/dataview/dataview.component';
     UpdatemodeComponent,
     InsertmodeComponent,
     DataviewComponent,
+    InsertOrUpdateFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { DataviewComponent } from './management/dataview/dataview.component';
     FieldsetModule,
     RadioButtonModule,
     TabViewModule,
+    SpinnerModule,
     RouterModule.forRoot([
       { path: 'management/import', component: ImportComponent },
       { path: 'management/export', component: ExportComponent },

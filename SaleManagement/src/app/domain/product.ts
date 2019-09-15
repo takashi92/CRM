@@ -51,6 +51,7 @@ export class Product {
         importAmount?: number,
         created?: number,
         updated?: any) {
+            
     }
 }
 
