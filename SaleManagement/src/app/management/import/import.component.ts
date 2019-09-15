@@ -50,6 +50,10 @@ export class ImportComponent implements OnInit {
     ];
   }
 
+  doSelect(event) {
+    console.log(event);
+  }
+
   showDialogToAdd() {
     this.newProduct = true;
     this.product = new Product();

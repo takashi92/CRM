@@ -82,4 +82,10 @@ export class ImportProductService {
       .toPromise()
       .then(res => <Product[]>res.data);
   }
+
+  createProperty(type:string, obj:any) {
+    console.log('type', type);
+    console.log('property', obj);
+
+  }
 }
