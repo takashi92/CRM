@@ -1,78 +1,72 @@
 package com.lpdev.salesmanagement.services;
 
 import java.util.Date;
+import java.util.Optional;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.lpdev.salesmanagement.commons.CommonResult;
 import com.lpdev.salesmanagement.entities.Brand;
 import com.lpdev.salesmanagement.repositories.BrandRepository;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class BrandService {
-
-	private static final Log log = LogFactory.getLog(CategoryService.class);
 
 	@Autowired
 	private BrandRepository brandRepository;
 
-	public void persist(Brand transientInstance) {
-		log.debug("persisting Brand instance");
+	public CommonResult saveOrUpdate(Brand brand) {
 		try {
-			transientInstance.setCreated(new Date().getTime());
-			brandRepository.save(transientInstance);
-			log.debug("persist successful");
+			Integer id = brand.getId();
+			if (id == null) {
+				brand.setCreated(new Date().getTime());
+				brandRepository.save(brand);
+				return CommonResult.getResult(true, "created Brand successful", brand);
+			}
+
+			Optional<Brand> opBrand = brandRepository.findById(id);
+			if (opBrand.isPresent()) {
+				brand.setCreated(opBrand.get().getCreated());
+				brand.setUpdated(new Date().getTime());
+				brandRepository.saveAndFlush(brand);
+				return CommonResult.getResult(true, "updated Brand successful", brand);
+			}
+
+			return CommonResult.getResult(false, "Brand ID = " + id + " is not exist", null);
 		} catch (RuntimeException re) {
-			log.error("persist failed", re);
 			throw re;
 		}
 	}
 
-	public void remove(Brand persistentInstance) {
-		log.debug("removing Brand instance");
+	public CommonResult delete(Integer id) {
 		try {
-			brandRepository.delete(persistentInstance);
-			log.debug("remove successful");
+			brandRepository.deleteById(id);
+			return CommonResult.getResult(true, "deleted Brand successful", null);
 		} catch (RuntimeException re) {
-			log.error("remove failed", re);
 			throw re;
 		}
 	}
 
-	public Brand merge(Brand detachedInstance) {
-		log.debug("merging Brand instance");
+	public CommonResult findById(Integer id) {
 		try {
-			Brand result = brandRepository.saveAndFlush(detachedInstance);
-			log.debug("merge successful");
-			return result;
+			Optional<Brand> opBrand = brandRepository.findById(id);
+			if (opBrand.isPresent()) {
+				return CommonResult.getResult(true, "get Brand successful", opBrand.get());
+			}
+
+			return CommonResult.getResult(false, "Brand ID = " + id + " is not exist", null);
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
 			throw re;
 		}
 	}
 
-	public Brand findById(Integer id) {
-		log.debug("getting Brand instance with id: " + id);
+	public CommonResult findAll() {
 		try {
-			Brand instance = brandRepository.getOne(id);
-			log.debug("get successful");
-			return instance;
+			return CommonResult.getResult(true, "get Brands successful", brandRepository.findAll());
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
-			throw re;
-		}
-	}
-
-	public Brand findByName(String name) {
-		log.debug("getting Brand instance with name: " + name);
-		try {
-			Brand instance = brandRepository.findByName(name);
-			log.debug("get successful");
-			return instance;
-		} catch (RuntimeException re) {
-			log.error("get failed", re);
 			throw re;
 		}
 	}

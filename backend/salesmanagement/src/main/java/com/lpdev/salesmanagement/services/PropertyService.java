@@ -1,66 +1,68 @@
 package com.lpdev.salesmanagement.services;
 
 import java.util.Date;
+import java.util.Optional;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.lpdev.salesmanagement.commons.CommonResult;
 import com.lpdev.salesmanagement.entities.Property;
 import com.lpdev.salesmanagement.repositories.PropertyRepository;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PropertyService {
-
-	private static final Log log = LogFactory.getLog(PropertyService.class);
 
 	@Autowired
 	private PropertyRepository propertyRepository;
 
-	public void persist(Property transientInstance) {
-		log.debug("persisting Properties instance");
+	public CommonResult saveOrUpdate(Property property) {
 		try {
-			transientInstance.setCreated(new Date().getTime());
-			propertyRepository.save(transientInstance);
-			log.debug("persist successful");
+			String code = property.getCode();
+			Optional<Property> opProperty = propertyRepository.findById(code);
+			if (opProperty.isPresent()) {
+				property.setCreated(opProperty.get().getCreated());
+				property.setUpdated(new Date().getTime());
+				propertyRepository.saveAndFlush(property);
+				return CommonResult.getResult(true, "updated Property successful", property);
+			}
+
+			property.setCreated(new Date().getTime());
+			propertyRepository.save(property);
+			return CommonResult.getResult(true, "created Property successful", property);
 		} catch (RuntimeException re) {
-			log.error("persist failed", re);
 			throw re;
 		}
 	}
 
-	public void remove(Property persistentInstance) {
-		log.debug("removing Properties instance");
+	public CommonResult delete(String id) {
 		try {
-			propertyRepository.delete(persistentInstance);
-			log.debug("remove successful");
+			propertyRepository.deleteById(id);
+			return CommonResult.getResult(true, "deleted Property successful", null);
 		} catch (RuntimeException re) {
-			log.error("remove failed", re);
 			throw re;
 		}
 	}
 
-	public Property merge(Property detachedInstance) {
-		log.debug("merging Properties instance");
+	public CommonResult findById(String id) {
 		try {
-			Property result = propertyRepository.saveAndFlush(detachedInstance);
-			log.debug("merge successful");
-			return result;
+			Optional<Property> opProperty = propertyRepository.findById(id);
+			if (opProperty.isPresent()) {
+				return CommonResult.getResult(true, "get Property successful", opProperty.get());
+			}
+
+			return CommonResult.getResult(false, "Property CODE = " + id + " is not exist", null);
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
 			throw re;
 		}
 	}
 
-	public Property findById(Integer id) {
-		log.debug("getting Properties instance with id: " + id);
+	public CommonResult findAll() {
 		try {
-			Property instance = propertyRepository.getOne(id);
-			log.debug("get successful");
-			return instance;
+			return CommonResult.getResult(true, "get Propertys successful", propertyRepository.findAll());
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
 			throw re;
 		}
 	}

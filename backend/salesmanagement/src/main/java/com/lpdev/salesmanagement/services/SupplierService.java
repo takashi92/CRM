@@ -1,63 +1,73 @@
 package com.lpdev.salesmanagement.services;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.lpdev.salesmanagement.commons.CommonResult;
 import com.lpdev.salesmanagement.entities.Supplier;
 import com.lpdev.salesmanagement.repositories.SupplierRepository;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SupplierService {
-
-	private static final Log log = LogFactory.getLog(SupplierService.class);
 
 	@Autowired
 	private SupplierRepository supplierRepository;
 
-	public void persist(Supplier transientInstance) {
-		log.debug("persisting Supplier instance");
+	public CommonResult saveOrUpdate(Supplier supplier) {
 		try {
-			supplierRepository.save(transientInstance);
-			log.debug("persist successful");
+			Integer id = supplier.getId();
+			if (id == null) {
+				supplier.setCreated(new Date().getTime());
+				supplierRepository.save(supplier);
+				return CommonResult.getResult(true, "created Supplier successful", supplier);
+			}
+
+			Optional<Supplier> opSupplier = supplierRepository.findById(id);
+			if (opSupplier.isPresent()) {
+				supplier.setCreated(opSupplier.get().getCreated());
+				supplier.setUpdated(new Date().getTime());
+				supplierRepository.saveAndFlush(supplier);
+				return CommonResult.getResult(true, "updated Supplier successful", supplier);
+			}
+
+			return CommonResult.getResult(false, "Supplier ID = " + id + " is not exist", null);
+
 		} catch (RuntimeException re) {
-			log.error("persist failed", re);
 			throw re;
 		}
 	}
 
-	public void remove(Supplier persistentInstance) {
-		log.debug("removing Supplier instance");
+	public CommonResult delete(Integer id) {
 		try {
-			supplierRepository.delete(persistentInstance);
-			log.debug("remove successful");
+			supplierRepository.deleteById(id);
+			return CommonResult.getResult(true, "deleted Supplier successful", null);
 		} catch (RuntimeException re) {
-			log.error("remove failed", re);
 			throw re;
 		}
 	}
 
-	public Supplier merge(Supplier detachedInstance) {
-		log.debug("merging Supplier instance");
+	public CommonResult findById(Integer id) {
 		try {
-			Supplier result = supplierRepository.saveAndFlush(detachedInstance);
-			log.debug("merge successful");
-			return result;
+			Optional<Supplier> opSupplier = supplierRepository.findById(id);
+			if (opSupplier.isPresent()) {
+				return CommonResult.getResult(true, "get Supplier successful", opSupplier.get());
+			}
+
+			return CommonResult.getResult(false, "Supplier ID = " + id + " is not exist", null);
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
 			throw re;
 		}
 	}
 
-	public Supplier findById(Integer id) {
-		log.debug("getting Supplier instance with id: " + id);
+	public CommonResult findAll() {
 		try {
-			Supplier instance = supplierRepository.getOne(id);
-			log.debug("get successful");
-			return instance;
+			return CommonResult.getResult(true, "get Suppliers successful", supplierRepository.findAll());
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
 			throw re;
 		}
 	}
