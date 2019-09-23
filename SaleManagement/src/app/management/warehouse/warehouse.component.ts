@@ -13,7 +13,11 @@ export class WarehouseComponent implements OnInit {
   constructor(private warehouseService: WarehouseService) { }
 
   ngOnInit() {
-    this.warehouseService.getProductData().then(products => this.products = products);
+    this.warehouseService.getProductData().then(products => {
+      this.products = products;
+      console.log(products);
+    });
+
   }
 }
 

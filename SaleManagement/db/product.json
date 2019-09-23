@@ -1,0 +1,44 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "brandName": "CHAANG",
+            "name": "Bộ cộc",
+            "properties": {
+                "code": "",
+                "size": "6 - 9",
+                "color": "Kẻ xanh biển",
+                "material": "",
+                "description": "Bộ quần đùi áo ba lỗ",
+                "barCode": ""
+            },
+            "number": 12,
+            "note": "",
+            "stickerPrice": 123,
+            "importedPrice": 123,
+            "importAmount": 123,
+            "created": 1567225170080,
+            "updated": null
+        },
+        {
+            "id": 2,
+            "brandName": "CHAANG",
+            "name": "Bộ dgfgh",
+            "properties": {
+                "code": "",
+                "color": "Kẻ xanh biển",
+                "material": "",
+                "size": "6 - 9",
+                "description": "Bộ quần đùi áo ba lỗ",
+                "barCode": ""
+            },
+            "number": 12,
+            "note": "",
+            "stickerPrice": 123,
+            "importedPrice": 123,
+            "importAmount": 123,
+            "created": 1567225202766,
+            "updated": null
+        }
+    ]
+}

@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/domain/product';
 import { SelectItem } from 'primeng/api';
 import { ImportProductService } from 'src/app/services/import-product.service';
-import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-insert-or-update-form',
