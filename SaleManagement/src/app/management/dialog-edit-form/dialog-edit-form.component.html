@@ -1,0 +1,17 @@
+<p-dialog
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [width]="1000"
+  [header]="label"
+>
+  <div *ngIf="selectedProduct">
+    <app-insert-or-update-form
+      [product]="selectedProduct"
+      (save)="doSave($event)"
+      (delete)="doDelete($event)"
+    ></app-insert-or-update-form>
+  </div>
+</p-dialog>

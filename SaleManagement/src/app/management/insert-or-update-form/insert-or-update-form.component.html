@@ -1,116 +1,161 @@
-<p-panel>
-    <p-header>
-        <div class="ui-helper-clearfix">
-            <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Chi tiết thông tin
-                sản phẩm</span>
-        </div>
-    </p-header>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="brand">Nhãn hàng</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <app-dropdownandaddbutton [options]="filteredBrands" [optionType]="'BRAND'"
-                (onSelectItem)="doSelect($event)">
-            </app-dropdownandaddbutton>
-        </div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="brand">Nhãn hàng</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <app-dropdownandaddbutton
+      [options]="filteredBrands"
+      [optionType]="'BRAND'"
+      (onSelectItem)="doSelect($event)"
+    >
+    </app-dropdownandaddbutton>
+  </div>
 
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="name">Tên sản phẩm</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <input pInputText id="name" [(ngModel)]="product.name" />
-        </div>
-    </div>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="code">Mã sản phẩm</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <input pInputText id="code" [(ngModel)]="product.properties.code" />
-        </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="name">Tên sản phẩm</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <input pInputText id="name" [(ngModel)]="product.name" />
+  </div>
+</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="code">Mã sản phẩm</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <input pInputText id="code" [(ngModel)]="product.properties.code" />
+  </div>
 
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="code">Chất liệu</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <app-dropdownandaddbutton [options]="filteredMaterials" [optionType]="'MATERIAL'"
-                (onSelectItem)="doSelect($event)">
-            </app-dropdownandaddbutton>
-        </div>
-    </div>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="code">Mô tả sản phẩm</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <input pInputText id="description" [(ngModel)]="product.properties.description" />
-        </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="code">Chất liệu</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <app-dropdownandaddbutton
+      [options]="filteredMaterials"
+      [optionType]="'MATERIAL'"
+      (onSelectItem)="doSelect($event)"
+    >
+    </app-dropdownandaddbutton>
+  </div>
+</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="code">Mô tả sản phẩm</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <input
+      pInputText
+      id="description"
+      [(ngModel)]="product.properties.description"
+    />
+  </div>
 
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="color">Màu</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <app-dropdownandaddbutton [options]="filteredColors" [optionType]="'BRAND'"
-                (onSelectItem)="doSelect($event)">
-            </app-dropdownandaddbutton>
-        </div>
-    </div>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="size">Kích cỡ</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <app-dropdownandaddbutton [options]="filteredSizes" [optionType]="'SIZE'" (onSelectItem)="doSelect($event)">
-            </app-dropdownandaddbutton>
-        </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="color">Màu</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <app-dropdownandaddbutton
+      [options]="filteredColors"
+      [optionType]="'BRAND'"
+      (onSelectItem)="doSelect($event)"
+    >
+    </app-dropdownandaddbutton>
+  </div>
+</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="size">Kích cỡ</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <app-dropdownandaddbutton
+      [options]="filteredSizes"
+      [optionType]="'SIZE'"
+      (onSelectItem)="doSelect($event)"
+    >
+    </app-dropdownandaddbutton>
+  </div>
 
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="size">Số lượng</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <p-spinner id="number" size="30" [(ngModel)]="product.number" [step]="1" [min]="0"></p-spinner>
-        </div>
-    </div>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="size">Giá niêm yết</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <p-spinner size="30" [(ngModel)]="product.stickerPrice" [step]="1000" [min]="0" [formatInput]="true">
-            </p-spinner>
-        </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="size">Số lượng</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <p-spinner
+      id="number"
+      size="30"
+      [(ngModel)]="product.number"
+      [step]="1"
+      [min]="0"
+    ></p-spinner>
+  </div>
+</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="size">Giá niêm yết</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <p-spinner
+      size="30"
+      [(ngModel)]="product.stickerPrice"
+      [step]="1000"
+      [min]="0"
+      [formatInput]="true"
+    >
+    </p-spinner>
+  </div>
 
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="size">Giá nhập</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <p-spinner id="importedPrice" size="30" [(ngModel)]="product.importedPrice" [step]="1000" [min]="0"
-                [formatInput]="true">
-            </p-spinner>
-        </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="size">Giá nhập</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <p-spinner
+      id="importedPrice"
+      size="30"
+      [(ngModel)]="product.importedPrice"
+      [step]="1000"
+      [min]="0"
+      [formatInput]="true"
+    >
+    </p-spinner>
+  </div>
+</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="note">Ghi chú</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <textarea pInputTextarea id="note" [(ngModel)]="product.note"></textarea>
+  </div>
+  <div class="ui-g-6 ui-md-2" style="text-align:right">
+    <label for="size">Tổng tiền nhập</label>
+  </div>
+  <div class="ui-g-6 ui-md-4">
+    <div class="ui-inputgroup">
+      <span
+        class="ui-inputgroup-addon"
+        id="importAmount"
+        [(ngModel)]="product.importAmount"
+        >{{ getAmountPrice() }}</span
+      >
+      <span class="ui-inputgroup-addon">.vnđ</span>
     </div>
-    <div class="ui-g ui-fluid">
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="note">Ghi chú</label>
-        </div>
-        <div class="ui-g-6 ui-md-4"><textarea pInputTextarea id="note" [(ngModel)]="product.note"></textarea>
-        </div>
-        <div class="ui-g-6 ui-md-2" style="text-align:right">
-            <label for="size">Tổng tiền nhập</label>
-        </div>
-        <div class="ui-g-6 ui-md-4">
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon" id="importAmount"
-                    [(ngModel)]="product.importAmount">{{ getAmountPrice() }}</span>
-                <span class="ui-inputgroup-addon">.vnđ</span>
-            </div>
-        </div>
-    </div>
-    <p-footer>
-        <button pButton type="button" icon="pi pi-check" label="Save" class="ui-button-info" style="margin-right: .25em"
-            (click)="save.emit()"></button>
-        <button pButton type="button" icon="pi pi-times" label="Delete" class="ui-button-danger"
-            (click)="delete.emit()"></button>
-    </p-footer>
-</p-panel>
+  </div>
+</div>
+<p-footer>
+  <button
+    pButton
+    type="button"
+    icon="pi pi-check"
+    label="Save"
+    class="ui-button-info"
+    style="margin-right: .25em"
+    (click)="save.emit()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    icon="pi pi-times"
+    label="Delete"
+    class="ui-button-danger"
+    (click)="delete.emit()"
+  ></button>
+</p-footer>

@@ -42,6 +42,7 @@ import { InsertmodeComponent } from './management/import/insertmode/insertmode.c
 import { DataviewComponent } from './management/dataview/dataview.component';
 import { InsertOrUpdateFormComponent } from './management/insert-or-update-form/insert-or-update-form.component';
 import { SpinnerModule } from 'primeng/spinner';
+import { DialogEditFormComponent } from './management/dialog-edit-form/dialog-edit-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +62,7 @@ import { SpinnerModule } from 'primeng/spinner';
     InsertmodeComponent,
     DataviewComponent,
     InsertOrUpdateFormComponent,
+    DialogEditFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -49,7 +49,8 @@ export class InsertmodeComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  save() {
+  save(event) {
+    alert("save");
     const products = [...this.products];
     if (this.newProduct) {
       products.push(this.product);
@@ -61,7 +62,7 @@ export class InsertmodeComponent implements OnInit {
     this.displayDialog = false;
   }
 
-  delete() {
+  delete(event) {
     const index = this.findSelectedProductIndex();
     this.products = this.products.filter((val, i) => i !== index);
     this.product = null;

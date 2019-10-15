@@ -56,10 +56,4 @@
     </ng-template>
 </p-dataView>
 
-
-<p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="true"
-    [width]="1000">
-    <div *ngIf="selectedProduct">
-        <app-insert-or-update-form [product]="selectedProduct"></app-insert-or-update-form>
-    </div>
-</p-dialog>
+<app-dialog-edit-form [(displayDialog)]="displayDialog" [selectedProduct]="selectedProduct" [label]="'Chi tiết sản phẩm'"></app-dialog-edit-form>
