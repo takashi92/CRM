@@ -1,67 +1,3 @@
-<!-- <p-dataView #dv [value]="products" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
-    [sortField]="sortField" [sortOrder]="sortOrder">
-    <p-header>
-        <div class="ui-helper-clearfix">
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-4">
-                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
-                        (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
-                </div>
-                <div class="ui-g-6 ui-md-4 filter-container">
-                    <div style="position:relative">
-                        <input type="search" pInputText placeholder="Tìm kiếm theo nhãn hàng"
-                            (keyup)="dv.filter($event.target.value)">
-                    </div>
-                </div>
-                <div class="ui-g-6 ui-md-4" style="text-align:right">
-                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-                </div>
-            </div>
-        </div>
-    </p-header>
-    <ng-template let-product pTemplate="listItem">
-        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
-            <div class="ui-g-12 ui-md-3" style="text-align:center">
-                <img class="productImage" src="assets/image/logo.png">
-            </div>
-            <div class="ui-g-12 ui-md-8">
-                <p-table [columns]="cols" [value]="getProductViewData(product)" selectionMode="single">
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr [pSelectableRow]="rowData" *ngFor="let col of columns">
-                            <td>
-                                {{col.header}}
-                            </td>
-                            <td>
-                                {{rowData[col.field]}}
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-            <div class="ui-g-12 ui-md-1 search-icon">
-                <button pButton type="button" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
-            </div>
-        </div>
-    </ng-template>    
-    <ng-template let-product pTemplate="gridItem">
-        <div style="padding:.5em" class="ui-g-12 ui-md-3">
-            <p-panel [header]="product.brandName" [style]="{'text-align':'center'}">
-                <img src="assets/image/logo.png" class="productImage">
-                <div style="text-align: center">{{product.name}} - {{product.stickerPrice}}</div>
-                <hr class="ui-widget-content" style="border-top:0">
-                <button pButton type="button" icon="pi pi-search" (click)="selectProduct($event, product)"
-                    style="margin-top:0"></button>
-            </p-panel>
-        </div>
-    </ng-template>
-</p-dataView> -->
-
-<app-dialog-edit-form
-  [(displayDialog)]="displayDialog"
-  [selectedProduct]="selectedProduct"
-  [label]="'Chi tiết sản phẩm'"
-></app-dialog-edit-form>
-
 <p-table
   #dv
   [value]="products"
@@ -104,7 +40,7 @@
           pButton
           type="button"
           icon="pi pi-search"
-          (click)="selectProduct($event, product)"
+          (click)="selectProduct($event, rowData)"
         ></button>
       </div>
     </tr>
@@ -143,3 +79,9 @@
     </tr>
   </ng-template>
 </p-table>
+
+<app-dialog-edit-form
+  [(displayDialog)]="displayDialog"
+  [selectedProduct]="selectedProduct"
+  [label]="'Chi tiết sản phẩm'"
+></app-dialog-edit-form>
