@@ -1,4 +1,4 @@
-<p-dataView #dv [value]="products" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
+<!-- <p-dataView #dv [value]="products" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
     [sortField]="sortField" [sortOrder]="sortOrder">
     <p-header>
         <div class="ui-helper-clearfix">
@@ -42,7 +42,7 @@
                 <button pButton type="button" icon="pi pi-search" (click)="selectProduct($event, product)"></button>
             </div>
         </div>
-    </ng-template>
+    </ng-template>    
     <ng-template let-product pTemplate="gridItem">
         <div style="padding:.5em" class="ui-g-12 ui-md-3">
             <p-panel [header]="product.brandName" [style]="{'text-align':'center'}">
@@ -54,6 +54,92 @@
             </p-panel>
         </div>
     </ng-template>
-</p-dataView>
+</p-dataView> -->
 
-<app-dialog-edit-form [(displayDialog)]="displayDialog" [selectedProduct]="selectedProduct" [label]="'Chi tiết sản phẩm'"></app-dialog-edit-form>
+<app-dialog-edit-form
+  [(displayDialog)]="displayDialog"
+  [selectedProduct]="selectedProduct"
+  [label]="'Chi tiết sản phẩm'"
+></app-dialog-edit-form>
+
+<p-table
+  #dv
+  [value]="products"
+  [columns]="cols"
+  dataKey="vin"
+  [paginator]="true"
+  [rows]="20"
+  paginatorPosition="both"
+  filterBy="brand"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3em"></th>
+      <th *ngFor="let col of cols">
+        {{ col.header }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-rowData
+    let-expanded="expanded"
+    let-columns="columns"
+  >
+    <tr>
+      <td>
+        <a href="#" [pRowToggler]="rowData">
+          <i
+            [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></i>
+        </a>
+      </td>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+      <div class="ui-g-12 ui-md-1 search-icon">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-search"
+          (click)="selectProduct($event, product)"
+        ></button>
+      </div>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <tr>
+      <td [attr.colspan]="columns.length + 1">
+        <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+          <div class="ui-g-12 ui-md-3" style="text-align:center">
+            <img
+              [attr.alt]="rowData.brand"
+              style="width:100px;"
+              src="assets/image/logo.png"
+            />
+          </div>
+          <div class="ui-g-12 ui-md-9">
+            <p-table
+              [columns]="cols"
+              [value]="getProductViewData(product)"
+              selectionMode="single"
+            >
+              <ng-template pTemplate="body" let-rowData1>
+                <tr [pSelectableRow]="rowData1" *ngFor="let col of columns">
+                  <td>
+                    {{ col.header }}
+                  </td>
+                  <td>
+                    {{ rowData[col.field] }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

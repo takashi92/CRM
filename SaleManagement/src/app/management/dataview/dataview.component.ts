@@ -2,13 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Product } from 'src/app/domain/product';
 import { SelectItem } from 'primeng/api';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/animations';
 @Component({
   selector: 'app-dataview',
   templateUrl: './dataview.component.html',
-  styleUrls: ['./dataview.component.scss']
+  styleUrls: ['./dataview.component.scss'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state(
+        'void',
+        style({
+          transform: 'translateX(-10%)',
+          opacity: 0
+        })
+      ),
+      state(
+        'active',
+        style({
+          transform: 'translateX(0)',
+          opacity: 1
+        })
+      ),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 })
 export class DataviewComponent implements OnInit {
-
   @Input() products: Product[];
   selectedProduct: Product;
   displayDialog: boolean;
@@ -21,7 +46,7 @@ export class DataviewComponent implements OnInit {
 
   sortOrder: number;
   cols: any[];
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.cols = [
@@ -55,13 +80,12 @@ export class DataviewComponent implements OnInit {
   }
 
   onSortChange(event) {
-    let value = event.value;
+    const value = event.value;
 
     if (value.indexOf('!') === 0) {
       this.sortOrder = -1;
       this.sortField = value.substring(1, value.length);
-    }
-    else {
+    } else {
       this.sortOrder = 1;
       this.sortField = value;
     }
@@ -74,5 +98,4 @@ export class DataviewComponent implements OnInit {
   getProductViewData(product: Product) {
     return [product];
   }
-
 }
